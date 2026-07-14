@@ -1109,7 +1109,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
 
   const renderModuleTables = (scope, datasets) => {
     document.getElementById("productionTable").innerHTML = T.metricRows(datasets.production, U.compactMoney, { totalLabel: "Total" });
-    document.getElementById("originTable").innerHTML = T.metricRows(datasets.origin, U.integer, { totalLabel: "Clasificados" });
+    document.getElementById("originTable").innerHTML = T.metricRows(datasets.origin, U.integer, { totalLabel: "Calificados y no calificados", hideTotalValue: true });
     document.getElementById("propertiesSummary").innerHTML = T.metricRows(datasets.properties, U.compactMoney, { totalLabel: "Ganancia", secondary: true });
     document.getElementById("mediaTable").innerHTML = T.metricRows(datasets.media, U.integer, { totalLabel: "Data basada en calificados y no calificados", hideTotalValue: true });
     document.getElementById("interestsTable").innerHTML = T.metricRows(datasets.interests, U.integer, { totalLabel: "Clasificados" });
