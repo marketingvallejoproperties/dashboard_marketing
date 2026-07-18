@@ -190,7 +190,7 @@ button, input, select, textarea, table, option { font-family: Inter, sans-serif;
 /* KPI cards */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--space-4);
   margin-bottom: var(--space-4);
 }
@@ -246,6 +246,7 @@ button, input, select, textarea, table, option { font-family: Inter, sans-serif;
 .span-4 { grid-column: span 4; }
 .span-6 { grid-column: span 6; }
 .span-8 { grid-column: span 8; }
+.span-12 { grid-column: 1 / -1; }
 .module-card {
   min-width: 0;
   padding: 18px;
@@ -303,6 +304,22 @@ button, input, select, textarea, table, option { font-family: Inter, sans-serif;
 .metric-bar i { display: block; height: 100%; background: var(--orange); }
 .metric-row-total { color: var(--orange-dark); font-weight: 600; }
 .empty-state { display: grid; place-items: center; height: 100%; color: var(--gray-400); font-size: 10px; }
+.module-note { margin: -7px 0 14px; color: var(--gray-600); font-size: 9px; }
+.marketing-revenue-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, .85fr); gap: 18px; min-height: 300px; }
+.marketing-revenue-chart { height: 300px; min-height: 300px; }
+.marketing-revenue-table { max-height: 300px; }
+.contract-detail { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--gray-100); }
+.contract-detail > header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.contract-detail > header strong { color: var(--dark); font-size: 12px; font-weight: 700; }
+.contract-detail > header span { color: var(--gray-600); font-size: 9px; }
+.contract-table-wrap { max-height: 285px; overflow: auto; border: 1px solid var(--gray-200); border-radius: 10px; }
+.contract-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 10px; }
+.contract-table th { position: sticky; top: 0; z-index: 1; padding: 10px; border-bottom: 2px solid var(--orange); background: var(--pearl); color: var(--dark); font-size: 8px; font-weight: 600; letter-spacing: .05em; text-align: left; text-transform: uppercase; }
+.contract-table th:last-child, .contract-table td:last-child { text-align: right; }
+.contract-table td { padding: 10px; border-bottom: 1px solid var(--gray-100); color: #4C4C4C; }
+.contract-table tbody tr:last-child td { border-bottom: 0; }
+.contract-table tbody tr:hover td { background: var(--orange-soft); }
+.contract-empty { min-height: 90px; border: 1px solid var(--gray-100); border-radius: 10px; }
 
 /* Executive table */
 .table-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 10px; padding-top: 15px; border-top: 1px solid var(--gray-100); }
@@ -344,17 +361,26 @@ button, input, select, textarea, table, option { font-family: Inter, sans-serif;
 .quarter-card > header > div { display: flex; align-items: center; gap: 9px; }
 .quarter-card > header > div > strong { display: grid; place-items: center; width: 38px; height: 30px; border-radius: 8px; background: var(--orange); color: var(--white); font-size: 11px; font-weight: 700; }
 .quarter-card > header span, .quarter-card > header small { color: var(--gray-600); font-size: 9px; }
-.quarter-kpis { display: grid; grid-template-columns: 1.5fr 1fr; gap: 9px; margin-bottom: 10px; }
+.quarter-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-bottom: 10px; }
 .quarter-kpis > div, .quarter-advisors, .quarter-categories > section { padding: 11px; border: 1px solid var(--gray-100); border-radius: 9px; background: var(--white); }
 .quarter-kpis span { display: block; margin-bottom: 5px; color: var(--gray-600); font-size: 8px; text-transform: uppercase; }
 .quarter-kpis strong { color: var(--dark); font-size: 16px; font-weight: 700; }
 .quarter-kpis > div:first-child strong { color: var(--orange-dark); }
+.quarter-kpis span small { display: block; margin-top: 2px; color: var(--gray-500); font-size: 7px; font-weight: 500; letter-spacing: .04em; }
+.quarter-kpi-marketing strong { color: var(--orange-dark); }
 .quarter-card h3 { margin: 0 0 7px; color: var(--gray-600); font-size: 8px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .quarter-advisor-row { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 7px; align-items: center; padding: 7px 0; border-top: 1px solid var(--gray-100); font-size: 9px; }
 .quarter-advisor-row > b, .quarter-categories li b { color: var(--orange-dark); }
 .quarter-advisor-row > strong { font-size: 10px; font-weight: 600; }
 .quarter-categories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 9px; }
 .quarter-categories-secondary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.quarter-categories-marketing { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.quarter-categories-marketing ol { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }
+.quarter-monthly-head, .quarter-monthly-row { display: grid; grid-template-columns: .8fr repeat(3, 1fr); gap: 8px; align-items: center; }
+.quarter-monthly-head { padding: 3px 0 7px; color: var(--gray-600); font-size: 8px; text-align: right; }
+.quarter-monthly-head span:first-child { text-align: left; }
+.quarter-monthly-row { padding: 7px 0; border-top: 1px solid var(--gray-100); font-size: 8px; text-align: right; }
+.quarter-monthly-row strong { color: var(--dark); font-weight: 600; text-align: left; }
 .quarter-categories ol { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .quarter-categories li { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 5px; align-items: center; font-size: 8px; }
 .quarter-categories li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -373,12 +399,15 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
 .vp-toast.error { border-left-color: var(--dark); }
 
 @media (max-width: 1100px) {
+  .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .app-header { grid-template-columns: 1fr; gap: 12px; }
   .filter-bar { grid-template-columns: repeat(5, minmax(120px, 1fr)); }
   .data-strip { align-items: flex-start; flex-direction: column; }
   .header-tools { width: 100%; justify-content: flex-start; }
   .span-8, .span-4 { grid-column: span 6; }
   .chart-table-layout, .chart-table-layout.compact { grid-template-columns: 1fr; }
+  .marketing-revenue-layout { grid-template-columns: 1fr; }
+  .marketing-revenue-table { height: auto; max-height: 230px; border-top: 1px solid var(--gray-100); border-left: 0; padding: 9px 0 0; }
   #moduleOrigin .chart-table-layout { grid-template-columns: 1fr; }
   .metric-table { max-height: 190px; border-top: 1px solid var(--gray-100); border-left: 0; padding: 9px 0 0; }
 }
@@ -393,11 +422,14 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
   .updated { width: 100%; }
   .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .span-4, .span-6, .span-8 { grid-column: 1 / -1; }
+  .span-12 { grid-column: 1 / -1; }
   .metric-table.horizontal { grid-template-columns: 1fr 1fr; }
   .quarterly-grid { grid-template-columns: 1fr; }
   .table-toolbar { align-items: flex-start; flex-direction: column; }
   .table-toolbar > div:last-child { width: 100%; }
   .institutional-signature { right: 14px; bottom: 14px; }
+  .contract-detail > header { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .contract-table { min-width: 680px; }
   .vp-toast { right: 14px; bottom: 66px; left: 14px; max-width: none; }
   #moduleLocations .chart-stage { height: 225px; min-height: 225px; }
   #moduleLocations .metric-table { max-height: 250px; }
@@ -408,7 +440,7 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
   .brand-block h1 { white-space: normal; }
   .kpi-grid { grid-template-columns: 1fr; }
   .kpi-card { height: 112px; }
-  .metric-table.horizontal, .response-scale, .quarter-categories, .quarter-kpis { grid-template-columns: 1fr; }
+  .metric-table.horizontal, .response-scale, .quarter-categories, .quarter-categories-marketing ol, .quarter-kpis { grid-template-columns: 1fr; }
   .header-tools .btn { flex: 1 1 160px; }
   .section-header { align-items: flex-start; flex-direction: column; }
 }
@@ -422,7 +454,7 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
   .dashboard-shell { width: 100%; padding: 7mm; }
   .app-header { grid-template-columns: 1fr; }
   .filter-bar, .header-tools, .data-strip, .table-toolbar, .dt-search, .dt-length, .dt-paging, .dt-info, .vp-toast { display: none !important; }
-  .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+  .kpi-grid { grid-template-columns: repeat(3, 1fr); }
   .dashboard-grid { gap: 8px; }
   .module-card, .kpi-card { break-inside: avoid; box-shadow: none; }
   .span-8, .span-4, .span-6 { grid-column: span 6; }
@@ -465,7 +497,9 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
       <article class="kpi-card" id="kpiLeads"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h10v10H4zM10 19h10V9M8 10l3 3 7-7"/></svg></span><div><p>Leads Entrantes</p><strong id="leadsValue">—</strong><small id="leadsVariation">Calificados y no calificados</small></div></article>
       <article class="kpi-card" id="kpiClosed"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span><div><p>Leads Cerrados</p><strong id="closedValue">—</strong><small id="closedVariation">—</small></div></article>
       <article class="kpi-card" id="kpiFeatured"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.1l5.9-.8z"/></svg></span><div><p>Vendedor destacado</p><strong id="featuredSellerValue">—</strong><small id="featuredSellerContext">Mayor producción del periodo</small></div></article>
-      <article class="kpi-card" id="kpiRevenue"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v18M17 7.5c0-1.7-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.3 5 3-2.2 3-5 3-5-1.3-5-3"/></svg></span><div><p>Ganancia</p><strong id="revenueValue">—</strong><small id="revenueVariation">—</small></div></article>
+      <article class="kpi-card" id="kpiRevenue"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v18M17 7.5c0-1.7-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.3 5 3-2.2 3-5 3-5-1.3-5-3"/></svg></span><div><p>Ganancias mensuales generales</p><strong id="revenueValue">—</strong><small id="revenueVariation">—</small></div></article>
+      <article class="kpi-card" id="kpiMarketingLeadsRevenue"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 18V9m6 9V5m6 13v-7m4 7H2"/></svg></span><div><p>Ganancia por leads de marketing</p><strong id="marketingLeadsRevenueValue">—</strong><small>Contractual atribuida a medios de marketing</small></div></article>
+      <article class="kpi-card" id="kpiMarketingFeatured"><span class="kpi-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.1l5.9-.8z"/></svg></span><div><p>Vendedor destacado · Marketing</p><strong id="marketingFeaturedSellerValue">—</strong><small id="marketingFeaturedSellerContext">Mayor ganancia contractual por leads de marketing</small></div></article>
     </section>
 
     <section class="dashboard-grid">
@@ -516,10 +550,30 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
         <header><div><span class="module-number">12</span><h2>Leads Molino</h2></div><strong id="molinoTotal">—</strong></header>
         <div class="chart-stage short"><canvas id="molinoChart"></canvas></div><div id="molinoTable" class="metric-table horizontal"></div>
       </article>
+
+      <article class="module-card span-12" id="moduleMarketingClosureRevenue">
+        <header><div><span class="module-number">13</span><h2>Ganancia por cierre · Medios de Marketing</h2></div><strong id="marketingClosureTotal">—</strong></header>
+        <p id="marketingClosureNote" class="module-note">Ganancia contractual atribuida a medios de marketing · Inversión mensual de Google declarada: $50,000</p>
+        <div class="marketing-revenue-layout">
+          <div class="chart-stage marketing-revenue-chart"><canvas id="marketingClosureChart"></canvas></div>
+          <div id="marketingClosureTable" class="metric-table marketing-revenue-table"></div>
+        </div>
+        <section class="contract-detail"><header><strong>Detalle de cierres contractuales</strong><span>Empresa, medio, vendedor y monto atribuido</span></header><div id="marketingClosureDetail"></div></section>
+      </article>
+
+      <article class="module-card span-12" id="moduleBrokerClosureRevenue">
+        <header><div><span class="module-number">14</span><h2>Ganancia por cierre · Broker</h2></div><strong id="brokerClosureTotal">—</strong></header>
+        <p class="module-note">Ganancia contractual atribuida a cierres mediante Broker</p>
+        <div class="marketing-revenue-layout">
+          <div class="chart-stage marketing-revenue-chart"><canvas id="brokerClosureChart"></canvas></div>
+          <div id="brokerClosureTable" class="metric-table marketing-revenue-table"></div>
+        </div>
+        <section class="contract-detail"><header><strong>Detalle de cierres contractuales</strong><span>HAMSA se clasifica como Broker con origen Web</span></header><div id="brokerClosureDetail"></div></section>
+      </article>
     </section>
 
     <section id="quarterlySection" class="quarterly-section" hidden>
-      <header class="section-header"><div><span class="module-number">+</span><h2>Ranking trimestral general</h2></div><span>Ganancia, cierres, vendedores, demanda y canales</span></header>
+      <header class="section-header"><div><span class="module-number">+</span><h2>Ranking trimestral general</h2></div><span>Ganancia, cierres, vendedores, demanda y medios de marketing</span></header>
       <div id="quarterlyRankings" class="quarterly-grid"></div>
     </section>
 
@@ -594,7 +648,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 (n=>{var o,a;"function"==typeof define&&define.amd?define(["jquery","datatables.net"],function(t){return n(t,window,document)}):"object"==typeof exports?(o=require("jquery"),a=function(t,e){e.fn.dataTable||require("datatables.net")(t,e)},"undefined"==typeof window?module.exports=function(t,e){return t=t||window,e=e||o(t),a(t,e),n(e,0,t.document)}:(a(window,o),module.exports=n(o,window,window.document))):n(jQuery,window,document)})(function(d,t,e){var n=d.fn.dataTable;return d.extend(!0,n.defaults,{renderer:"bootstrap"}),d.extend(!0,n.ext.classes,{container:"dt-container dt-bootstrap5",search:{input:"form-control form-control-sm"},length:{select:"form-select form-select-sm"},processing:{container:"dt-processing card"},layout:{row:"row mt-2 justify-content-between",cell:"d-md-flex justify-content-between align-items-center",tableCell:"col-12",start:"dt-layout-start col-md-auto me-auto",end:"dt-layout-end col-md-auto ms-auto",full:"dt-layout-full col-md"}}),n.ext.renderer.pagingButton.bootstrap=function(t,e,n,o,a){var r=["dt-paging-button","page-item"],o=(o&&r.push("active"),a&&r.push("disabled"),d("<li>").addClass(r.join(" ")));return{display:o,clicker:d("<button>",{class:"page-link",role:"link",type:"button"}).html(n).appendTo(o)}},n.ext.renderer.pagingContainer.bootstrap=function(t,e){return d("<ul/>").addClass("pagination").append(e)},n});
 </script>
   <script data-source="assets/data/default-model.js">
-globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z","sourceName":"REPORTES MKT 2026 (3).xlsx","months":[{"name":"ENERO","label":"Enero","order":1,"sheet":"DE RESUMEN ENERO","leads":158,"closed":5,"mrr":274160,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":27,"sellers":{"Fernanda Aguilar":16000,"Alejandro Ubando":258160},"sections":{"origin":{"Directo":143,"Broker":15},"propertyRevenue":{"Oficinas":40000,"Bodegas":198000,"Locales":20160,"Islas":16000},"media":{"Google Form":97,"Chat Ai":2,"Llamadas De Google":9,"Publicidad Exterior":17,"Redes Sociales":1,"Web Form":22,"Whatsaap":10},"interests":{"Bodegas":65,"Locales":68,"Consultorio":5,"Oficinas":20},"locations":{"Lerma":1,"Moresa":1,"Corona":1,"Plaza Ferreria":1,"Parques Plaza Nuevo Polanco":1},"social":{"Vallejo":20,"Ferreria":27,"Ppnp":60,"Molino":24,"Padel":16},"toluca":{"Locales":5,"Departamentos":17,"Padel":20}},"records":[{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Revnoc","contact":"Estela Xu","property":"Oficina","zone":"Piso 7a De Lerma","source":"Inmuebles 24","mrr":40000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Importadora Ferka","contact":"Tere Balderrama","property":"Bodegas","zone":"Moresa 1 C2","source":"Web / Google","mrr":75000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Kefei Hong","contact":"Kefei Hong","property":"Bodegas","zone":"Bodega 17 C - Corona","source":"Inbout","mrr":123000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Lumoga","contact":"Lucero Arzola Hernandez","property":"Locales Comerciales","zone":"Local 6 Ferreria","source":"Inbout","mrr":20160,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Maíz Urbano","contact":"Fernando Palacios","property":"Isla","zone":"Parques Plaza Nuevo Polanco","source":"Web / Google","mrr":16000,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"FEBRERO","label":"Febrero","order":2,"sheet":"RESUMEN FEBRERO","leads":86,"closed":8,"mrr":1307730,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":10,"sellers":{"Linda Martín":151200,"Fernanda Aguilar":613580,"Alejandro Ubando":542950},"sections":{"origin":{"Directo":78,"Broker":7},"propertyRevenue":{"Bodegas":1111930,"Locales":27000,"Oficinas":168800},"media":{"Google Form":34,"Chat Ai":3,"Llamadas De Google":5,"Publicidad Exterior":15,"Redes Sociales":0,"Web Form":22,"Whatsaap":7},"interests":{"Bodegas":31,"Locales":15,"Consultorio":4,"Oficinas":18,"Departamentos Toluca":18},"locations":{"Independencia":1,"Malta":1,"Horacio":2,"Norte 45":2,"Pasaje Ferreria":1,"Niza":1},"social":{"Vallejo":20,"Ferreria":38,"Ppnp":25,"Molino":18,"Padel":22},"toluca":{"Locales":6,"Departamentos":10,"Padel":8}},"records":[{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"COMERCIALIZADORA KRAM","contact":"KRAM","property":"Bodega","zone":"Independencia Bodega 4","source":"Active Clients","mrr":151200,"probability":1,"representative":"Linda Martín"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"EDICIONES DE COMPUTACIÓN","contact":"EDICOM","property":"Oficina","zone":"Malta Edif Gris Piso 1","source":"Inbout","mrr":25000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"MARCO ADRIAN HERNADEZ LEMUS","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340 Piso 7a-1","source":"Inbout","mrr":28800,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"REAL TURF","contact":"ELIETH VELOZ","property":"Bodega","zone":"Vallejo Nte 45","source":"Lona","mrr":402150,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"ELS LOGITIC","contact":"ELS","property":"Oficina","zone":"Horacio 340 Piso 7a-2","source":"Web","mrr":60000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"KELLY CELIC GRANADOS M.","contact":"KELLY CELIC","property":"Local","zone":"Pasaje Ferreria Local 28","source":"Inbout","mrr":27000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"HERRAJES Y ACABADOS","contact":"HAMSA","property":"Bodega","zone":"Parque Norte 45","source":"Web","mrr":558580,"probability":1,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"TRI STAR INTERNATIONAL","contact":"Melissa Lee","property":"Oficina","zone":"Niza 77","source":"Web","mrr":55000,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"MARZO","label":"Marzo","order":3,"sheet":"RESUMEN MARZO","leads":162,"closed":6,"mrr":497500,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":18,"sellers":{"Linda Martín":0,"Fernanda Aguilar":73500,"Alejandro Ubando":424000},"sections":{"origin":{"Directo":152,"Broker":10},"propertyRevenue":{"Bodegas":190000,"Locales":239500,"Oficinas":68000},"media":{"Ia De Busquedas":34,"Google Form":50,"Chat Ai":10,"Llamadas De Google":30,"Publicidad Exterior":20,"Redes Sociales":7,"Web Form":15,"Whatsaap":30},"interests":{"Bodegas":56,"Locales":59,"Consultorio":10,"Oficinas":22,"Islas":15},"locations":{"Parques Plaza Nuevo Polanco":3,"Horacio":1,"Norte 45":1,"Pasaje Ferreria":1},"social":{"Vallejo":20,"Ferreria":55,"Ppnp":25,"Molino":20,"Padel":25},"toluca":{"Locales":7,"Departamentos":10,"Padel":10}},"records":[{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"MONUMENTAL FOOD","contact":"David Garay","property":"Local","zone":"Polanco","source":"Inbout","mrr":24000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"EL PESCADITO","contact":"CARLOS MORALES HASSANILE","property":"Local","zone":"Polanco","source":"Llamada Google","mrr":47500,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"ENTRETENIMIENTO DIGITAL","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340","source":"Inbout","mrr":68000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"JIE IMPORT","contact":"JIE IMPORT SA .DE .CV","property":"Bodega","zone":"Vallejo Nte 45","source":"Web","mrr":190000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"LI HAIFENG","contact":"ZHUYI RAMEN","property":"Local","zone":"Polanco","source":"Lona","mrr":26000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"MEDYSIN","contact":"MEDICAMENTOS Y SERVICIOS INTEGRALES DEL NORESTE","property":"Local","zone":"Pasaje Ferreria Local 28","source":"Lona","mrr":142000,"probability":1,"representative":"Alejandro Ubando"}]},{"name":"ABRIL","label":"Abril","order":4,"sheet":"RESUMEN ABRIL","leads":76,"closed":3,"mrr":197300,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":18,"sellers":{"Linda Martín":0,"Fernanda Aguilar":166800,"Alejandro Ubando":30500},"sections":{"origin":{"Directo":56,"Broker":20},"propertyRevenue":{"Locales":23000,"Oficinas":166800,"Islas":7500},"media":{"Ia De Busquedas":10,"Google Form":20,"Chat Ai":8,"Llamadas De Google":7,"Publicidad Exterior":20,"Redes Sociales":1,"Web Form":5,"Whatsaap":5},"interests":{"Bodegas":30,"Locales":25,"Consultorio":0,"Oficinas":15},"locations":{"Pasaje Ferreria":2,"Horacio":1},"social":{"Vallejo":15,"Ferreria":65,"Ppnp":10,"Molino":38,"Padel":19},"toluca":{"Locales":8,"Departamentos":6,"Padel":12}},"records":[{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PASTES KIKOS","contact":"SUGAR TREAT HOUSE","property":"Local","zone":"Ferreria Local 4a","source":"Inbout","mrr":23000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PROTEINAS","contact":"HUGO GONZÁLEZ VARGAS","property":"Isla","zone":"Ferreria Isla K08","source":"Inbout","mrr":7500,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"FINANCIERA MEXICO/ JOINED","contact":"SUSANA MORALES","property":"Oficina","zone":"Horacio 340 Ph","source":"Web","mrr":166800,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"MAYO","label":"Mayo","order":5,"sheet":"RESUMEN MAYO","leads":232,"closed":7,"mrr":1655856,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":20,"sellers":{"Linda Martín":658720,"Fernanda Aguilar":130000,"Alejandro Ubando":867136},"sections":{"origin":{"Directo":202,"Broker":30},"propertyRevenue":{"Bodegas":1058720,"Locales":117336,"Oficinas":479800},"media":{"Ia De Busquedas":42,"Google Form":93,"Chat Ai":15,"Llamadas De Google":18,"Publicidad Exterior":25,"Redes Sociales":5,"Web Form":14,"Whatsaap":20},"interests":{"Bodegas":85,"Locales":66,"Consultorio":25,"Oficinas":41,"Departamentos Toluca":15},"locations":{"Col Del Valle":1,"Clavel":1,"Pasaje Ferreria":2,"Eduardo Molina Ii":1,"Norte 45":1,"Upt Juarez":1},"social":{"Vallejo":12,"Ferreria":45,"Ppnp":15,"Molino":25,"Padel":20},"toluca":{"Locales":9,"Departamentos":8,"Padel":10}},"records":[{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"USTORAGE","contact":"USTORAGE","property":"Local","zone":"Col Del Valle","source":"Inbout","mrr":130000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel B1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"FARMACIAS DE CONFIANZA/SIMILARES","contact":"GRISELDA MARTINEZ","property":"Local","zone":"Ferreria Local 4b","source":"Inbout","mrr":24300,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"LED CONTROL","contact":"FRANCISCO AMADOR","property":"Bodega","zone":"Eduardo Molina 2 Bodega 2","source":"Google","mrr":400000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"RISOUL Y CIA","contact":"DIEGO GARZA MEDELLIN","property":"Bodega","zone":"Norte 45 Bodega 3","source":"Cliente Activo / Broker","mrr":658720,"probability":0,"representative":"Linda Martín"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"AUTO TYRE","contact":"ADRIANA FONSECA","property":"Local","zone":"Utp Juárez Local 4","source":"Web","mrr":73000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"CON CHALE","contact":"OSWALDO LOPEZ","property":"Local","zone":"Ferreria Local 2","source":"Inbout","mrr":20036,"probability":1,"representative":"Alejandro Ubando"}]},{"name":"JUNIO","label":"Junio","order":6,"sheet":"RESUMEN JUNIO","leads":198,"closed":7,"mrr":1260759,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":23,"sellers":{"Lic. Miguel":442560,"Fernanda Aguilar":45000,"Alejandro Ubando":753163,"Nancy":20036},"sections":{"origin":{"Directo":188,"Broker":10},"propertyRevenue":{"Bodegas":700163,"Locales":487560,"Oficinas":73036},"media":{"Ia De Busquedas":31,"Google Form":70,"Chat Ai":18,"Llamadas De Google":15,"Publicidad Exterior":25,"Redes Sociales":5,"Web Form":20,"Whatsaap":14},"interests":{"Bodegas":84,"Locales":65,"Consultorio":9,"Oficinas":40},"locations":{"Col Del Valle":1,"Niza":1,"Clavel":2,"Molina I":1,"Molina Ii":1,"Masarik":1},"social":{"Vallejo":12,"Ferreria":90,"Ppnp":15,"Molino":38,"Padel":23},"toluca":{"Locales":10,"Departamentos":15,"Padel":9}},"records":[{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"USTORAGE","contact":"USTORAGE","property":"Local","zone":"Col Del Valle Local 1","source":"Web","mrr":45000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"BIENQUE","contact":"DYLAN ALEXIS CID MARTINEZ","property":"Oficina","zone":"Niza Piso 7","source":"Cliente Activo","mrr":53000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel Bodega 1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"DU JINQUAN","contact":"DU JINQUAN","property":"Bodega","zone":"Molina 2","source":"Inbout","mrr":265363,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"ENTRETENIMIENTO DIGITAL","contact":"ENTRETENIMIENTO DIGITAL","property":"Bodega","zone":"Clavel 3","source":"Cliente Activo","mrr":85000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"KIA","contact":"KURE MOTORS","property":"Local","zone":"Edu Molina 1 Local 2","source":"Cliente Activo","mrr":442560,"probability":1,"representative":"Lic. Miguel"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"LESPAGO","contact":"LESPAGO / NANCY CONTRERAS","property":"Oficina","zone":"Masaryk Piso 10a","source":"Web","mrr":20036,"probability":1,"representative":"Nancy"}]}],"records":[{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Revnoc","contact":"Estela Xu","property":"Oficina","zone":"Piso 7a De Lerma","source":"Inmuebles 24","mrr":40000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Importadora Ferka","contact":"Tere Balderrama","property":"Bodegas","zone":"Moresa 1 C2","source":"Web / Google","mrr":75000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Kefei Hong","contact":"Kefei Hong","property":"Bodegas","zone":"Bodega 17 C - Corona","source":"Inbout","mrr":123000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Lumoga","contact":"Lucero Arzola Hernandez","property":"Locales Comerciales","zone":"Local 6 Ferreria","source":"Inbout","mrr":20160,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Maíz Urbano","contact":"Fernando Palacios","property":"Isla","zone":"Parques Plaza Nuevo Polanco","source":"Web / Google","mrr":16000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"COMERCIALIZADORA KRAM","contact":"KRAM","property":"Bodega","zone":"Independencia Bodega 4","source":"Active Clients","mrr":151200,"probability":1,"representative":"Linda Martín"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"EDICIONES DE COMPUTACIÓN","contact":"EDICOM","property":"Oficina","zone":"Malta Edif Gris Piso 1","source":"Inbout","mrr":25000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"MARCO ADRIAN HERNADEZ LEMUS","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340 Piso 7a-1","source":"Inbout","mrr":28800,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"REAL TURF","contact":"ELIETH VELOZ","property":"Bodega","zone":"Vallejo Nte 45","source":"Lona","mrr":402150,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"ELS LOGITIC","contact":"ELS","property":"Oficina","zone":"Horacio 340 Piso 7a-2","source":"Web","mrr":60000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"KELLY CELIC GRANADOS M.","contact":"KELLY CELIC","property":"Local","zone":"Pasaje Ferreria Local 28","source":"Inbout","mrr":27000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"HERRAJES Y ACABADOS","contact":"HAMSA","property":"Bodega","zone":"Parque Norte 45","source":"Web","mrr":558580,"probability":1,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"TRI STAR INTERNATIONAL","contact":"Melissa Lee","property":"Oficina","zone":"Niza 77","source":"Web","mrr":55000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"MONUMENTAL FOOD","contact":"David Garay","property":"Local","zone":"Polanco","source":"Inbout","mrr":24000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"EL PESCADITO","contact":"CARLOS MORALES HASSANILE","property":"Local","zone":"Polanco","source":"Llamada Google","mrr":47500,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"ENTRETENIMIENTO DIGITAL","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340","source":"Inbout","mrr":68000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"JIE IMPORT","contact":"JIE IMPORT SA .DE .CV","property":"Bodega","zone":"Vallejo Nte 45","source":"Web","mrr":190000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"LI HAIFENG","contact":"ZHUYI RAMEN","property":"Local","zone":"Polanco","source":"Lona","mrr":26000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":"RESUMEN MARZO","company":"MEDYSIN","contact":"MEDICAMENTOS Y SERVICIOS INTEGRALES DEL NORESTE","property":"Local","zone":"Pasaje Ferreria Local 28","source":"Lona","mrr":142000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PASTES KIKOS","contact":"SUGAR TREAT HOUSE","property":"Local","zone":"Ferreria Local 4a","source":"Inbout","mrr":23000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PROTEINAS","contact":"HUGO GONZÁLEZ VARGAS","property":"Isla","zone":"Ferreria Isla K08","source":"Inbout","mrr":7500,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"FINANCIERA MEXICO/ JOINED","contact":"SUSANA MORALES","property":"Oficina","zone":"Horacio 340 Ph","source":"Web","mrr":166800,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"USTORAGE","contact":"USTORAGE","property":"Local","zone":"Col Del Valle","source":"Inbout","mrr":130000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel B1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"FARMACIAS DE CONFIANZA/SIMILARES","contact":"GRISELDA MARTINEZ","property":"Local","zone":"Ferreria Local 4b","source":"Inbout","mrr":24300,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"LED CONTROL","contact":"FRANCISCO AMADOR","property":"Bodega","zone":"Eduardo Molina 2 Bodega 2","source":"Google","mrr":400000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"RISOUL Y CIA","contact":"DIEGO GARZA MEDELLIN","property":"Bodega","zone":"Norte 45 Bodega 3","source":"Cliente Activo / Broker","mrr":658720,"probability":0,"representative":"Linda Martín"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"AUTO TYRE","contact":"ADRIANA FONSECA","property":"Local","zone":"Utp Juárez Local 4","source":"Web","mrr":73000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":"RESUMEN MAYO","company":"CON CHALE","contact":"OSWALDO LOPEZ","property":"Local","zone":"Ferreria Local 2","source":"Inbout","mrr":20036,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"USTORAGE","contact":"USTORAGE","property":"Local","zone":"Col Del Valle Local 1","source":"Web","mrr":45000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"BIENQUE","contact":"DYLAN ALEXIS CID MARTINEZ","property":"Oficina","zone":"Niza Piso 7","source":"Cliente Activo","mrr":53000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel Bodega 1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"DU JINQUAN","contact":"DU JINQUAN","property":"Bodega","zone":"Molina 2","source":"Inbout","mrr":265363,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"ENTRETENIMIENTO DIGITAL","contact":"ENTRETENIMIENTO DIGITAL","property":"Bodega","zone":"Clavel 3","source":"Cliente Activo","mrr":85000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"KIA","contact":"KURE MOTORS","property":"Local","zone":"Edu Molina 1 Local 2","source":"Cliente Activo","mrr":442560,"probability":1,"representative":"Lic. Miguel"},{"month":"JUNIO","order":6,"sheet":"RESUMEN JUNIO","company":"LESPAGO","contact":"LESPAGO / NANCY CONTRERAS","property":"Oficina","zone":"Masaryk Piso 10a","source":"Web","mrr":20036,"probability":1,"representative":"Nancy"}],"warnings":["Febrero: Origen del Contacto clasifica 85 registros frente a 86 leads declarados.","Marzo: Medio clasifica 196 registros frente a 162 leads declarados.","Abril: Intereses clasifica 70 registros frente a 76 leads declarados."]};
+globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-18T06:07:57.401Z","sourceName":"REPORTES MKT GENERAL 2026.xlsx","months":[{"name":"ENERO","label":"Enero","order":1,"sheet":"DE RESUMEN ENERO","leads":158,"closed":5,"mrr":274160,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":27,"sellers":{"Fernanda Aguilar":16000,"Alejandro Ubando":258160},"sections":{"origin":{"Directo":143,"Broker":15},"propertyRevenue":{"Oficinas":40000,"Bodegas":198000,"Locales":20160,"Islas":16000},"media":{"Google Form":97,"Chat Ai":2,"Llamadas De Google":9,"Publicidad Exterior":17,"Redes Sociales":1,"Web Form":22,"Whatsaap":10},"interests":{"Bodegas":65,"Locales":68,"Consultorio":5,"Oficinas":20},"locations":{"Lerma":1,"Moresa":1,"Corona":1,"Plaza Ferreria":1,"Parques Plaza Nuevo Polanco":1},"social":{"Vallejo":20,"Ferreria":27,"Ppnp":60,"Molino":24,"Padel":16},"toluca":{"Locales":5,"Departamentos":17,"Padel":20}},"marketingClosures":[{"month":"ENERO","company":"Revnoc","medium":"Inmuebles 24","value":480000,"representative":"Alejandro Ubando"},{"month":"ENERO","company":"IMPORTADORA FERKA","medium":"Google Web","value":2700000,"representative":"Alejandro Ubando"},{"month":"ENERO","company":"MAIZ URBANO","medium":"Google Web","value":192000,"representative":"Fernanda Aguilar"}],"brokerClosures":[],"records":[{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Revnoc","contact":"Estela Xu","property":"Oficina","zone":"Piso 7a De Lerma","source":"Inmuebles 24","mrr":40000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Importadora Ferka","contact":"Tere Balderrama","property":"Bodega","zone":"Moresa 1 C2","source":"Web / Google","mrr":75000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Kefei Hong","contact":"Kefei Hong","property":"Bodega","zone":"Bodega 17 C - Corona","source":"Inbout","mrr":123000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Lumoga","contact":"Lucero Arzola Hernandez","property":"Locales Comerciales","zone":"Local 6 Ferreria","source":"Inbout","mrr":20160,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Maíz Urbano","contact":"Fernando Palacios","property":"Isla","zone":"Parques Plaza Nuevo Polanco","source":"Web / Google","mrr":16000,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"FEBRERO","label":"Febrero","order":2,"sheet":"RESUMEN FEBRERO","leads":86,"closed":8,"mrr":1307730,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":10,"sellers":{"Linda Martín":151200,"Fernanda Aguilar":613580,"Alejandro Ubando":542950},"sections":{"origin":{"Directo":78,"Broker":7},"propertyRevenue":{"Bodegas":1111930,"Locales":27000,"Oficinas":168800},"media":{"Google Form":34,"Chat Ai":3,"Llamadas De Google":5,"Publicidad Exterior":15,"Redes Sociales":0,"Web Form":22,"Whatsaap":7},"interests":{"Bodegas":31,"Locales":15,"Consultorio":4,"Oficinas":18,"Departamentos Toluca":18},"locations":{"Independencia":1,"Malta":1,"Horacio":2,"Norte 45":2,"Pasaje Ferreria":1,"Niza":1},"social":{"Vallejo":20,"Ferreria":38,"Ppnp":25,"Molino":18,"Padel":22},"toluca":{"Locales":6,"Departamentos":10,"Padel":8}},"marketingClosures":[{"month":"FEBRERO","company":"REAL TURF","medium":"Lona","value":14477400,"representative":"Alejandro Ubando"},{"month":"FEBRERO","company":"ELS LOGITIC","medium":"Google Web","value":720000,"representative":"Alejandro Ubando"},{"month":"FEBRERO","company":"HERRAJES Y ACABADOS (HAMSA)","medium":"Google Web","value":13405920,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","company":"TRI STAR INTERNATIONAL","medium":"Google Web","value":1900080,"representative":"Fernanda Aguilar"}],"brokerClosures":[{"month":"FEBRERO","company":"HAMSA","medium":"Broker","origin":"Web","leadType":"Lead Web","value":13405920,"representative":"Fernanda Aguilar"}],"records":[{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"COMERCIALIZADORA KRAM","contact":"KRAM","property":"Bodega","zone":"Independencia Bodega 4","source":"Active Clients","mrr":151200,"probability":1,"representative":"Linda Martín"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"EDICIONES DE COMPUTACIÓN","contact":"EDICOM","property":"Oficina","zone":"Malta Edif Gris Piso 1","source":"Inbout","mrr":25000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"MARCO ADRIAN HERNADEZ LEMUS","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340 Piso 7a-1","source":"Inbout","mrr":28800,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"REAL TURF","contact":"ELIETH VELOZ","property":"Bodega","zone":"Vallejo Nte 45","source":"Lona","mrr":402150,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"ELS LOGITIC","contact":"ELS","property":"Oficina","zone":"Horacio 340 Piso 7a-2","source":"Web","mrr":60000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"KELLY CELIC GRANADOS M.","contact":"KELLY CELIC","property":"Local","zone":"Pasaje Ferreria Local 28","source":"Inbout","mrr":27000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"HERRAJES Y ACABADOS","contact":"HAMSA","property":"Bodega","zone":"Parque Norte 45","source":"Web","mrr":558580,"probability":1,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"TRI STAR INTERNATIONAL","contact":"Melissa Lee","property":"Oficina","zone":"Niza 77","source":"Web","mrr":55000,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"MARZO","label":"Marzo","order":3,"sheet":" RESUMEN MARZO","leads":162,"closed":6,"mrr":497500,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":18,"sellers":{"Linda Martín":0,"Fernanda Aguilar":73500,"Alejandro Ubando":234000},"sections":{"origin":{"Directo":152,"Broker":10},"propertyRevenue":{"Bodegas":332000,"Locales":239500,"Oficinas":68000},"media":{"Ia De Busquedas":34,"Google Form":50,"Chat Ai":10,"Llamadas De Google":30,"Publicidad Exterior":20,"Redes Sociales":7,"Web Form":15,"Whatsaap":30},"interests":{"Bodegas":56,"Locales":59,"Consultorio":10,"Oficinas":22,"Islas":15},"locations":{"Parques Plaza Nuevo Polanco":3,"Horacio":1,"Norte 45":1,"Pasaje Ferreria":1},"social":{"Vallejo":20,"Ferreria":55,"Ppnp":25,"Molino":20,"Padel":25},"toluca":{"Locales":7,"Departamentos":10,"Padel":10}},"marketingClosures":[{"month":"MARZO","company":"El pescadito","medium":"Llamada Google","value":570000,"representative":"Fernanda Aguilar"},{"month":"MARZO","company":"LI HAIFENG (ZHUYI RAMEN)","medium":"Lona","value":312000,"representative":"Fernanda Aguilar"},{"month":"MARZO","company":"MEDYSIN","medium":"Lona","value":3408000,"representative":"Alejandro Ubando"}],"brokerClosures":[],"records":[{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"MONUMENTAL FOOD","contact":"David Garay","property":"Local","zone":"Polanco","source":"Inbout","mrr":24000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"EL PESCADITO","contact":"CARLOS MORALES HASSANILE","property":"Local","zone":"Polanco","source":"Llamada Google","mrr":47500,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"ENTRETENIMIENTO DIGITAL","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340","source":"Inbout","mrr":68000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"JIE IMPORT","contact":"JIE IMPORT SA .DE .CV","property":"Bodega","zone":"Vallejo Nte 45","source":"Active Clients","mrr":190000,"probability":1,"representative":"Veronica"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"LI HAIFENG","contact":"ZHUYI RAMEN","property":"Local","zone":"Polanco","source":"Lona","mrr":26000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"MEDYSIN","contact":"MEDICAMENTOS Y SERVICIOS INTEGRALES DEL NORESTE","property":"Bodega","zone":"Vallejo Nte 45","source":"Lona","mrr":142000,"probability":1,"representative":"Alejandro Ubando"}]},{"name":"ABRIL","label":"Abril","order":4,"sheet":"RESUMEN ABRIL","leads":76,"closed":3,"mrr":197300,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":18,"sellers":{"Linda Martín":0,"Fernanda Aguilar":166800,"Alejandro Ubando":30500},"sections":{"origin":{"Directo":56,"Broker":20},"propertyRevenue":{"Locales":23000,"Oficinas":166800,"Islas":7500},"media":{"Ia De Busquedas":10,"Google Form":20,"Chat Ai":8,"Llamadas De Google":7,"Publicidad Exterior":20,"Redes Sociales":1,"Web Form":5,"Whatsaap":5},"interests":{"Bodegas":30,"Locales":25,"Consultorio":0,"Oficinas":15},"locations":{"Pasaje Ferreria":2,"Horacio":1},"social":{"Vallejo":15,"Ferreria":65,"Ppnp":10,"Molino":38,"Padel":19},"toluca":{"Locales":8,"Departamentos":6,"Padel":12}},"marketingClosures":[{"month":"ABRIL","company":"PASTES KIKOS","medium":"Web / Directo","value":1380000,"representative":"Alejandro Ubando"},{"month":"ABRIL","company":"FINANCIERA MEXICO/ JOINED","medium":"Web","value":4003200,"representative":"Fernanda Aguilar"}],"brokerClosures":[],"records":[{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PASTES KIKOS","contact":"SUGAR TREAT HOUSE","property":"Local","zone":"Ferreria Local 4a","source":"Inbout","mrr":23000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PROTEINAS","contact":"HUGO GONZÁLEZ VARGAS","property":"Isla","zone":"Ferreria Isla K08","source":"Inbout","mrr":7500,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"FINANCIERA MEXICO/ JOINED","contact":"SUSANA MORALES","property":"Oficina","zone":"Horacio 340 Ph","source":"Web","mrr":166800,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"MAYO","label":"Mayo","order":5,"sheet":" RESUMEN MAYO","leads":232,"closed":7,"mrr":1570856,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":20,"sellers":{"Linda Martín":658720,"Fernanda Aguilar":45000,"Alejandro Ubando":867136},"sections":{"origin":{"Directo":202,"Broker":30},"propertyRevenue":{"Bodegas":1408520,"Locales":117336,"Oficinas":45000},"media":{"Ia De Busquedas":42,"Google Form":93,"Chat Ai":15,"Llamadas De Google":18,"Publicidad Exterior":25,"Redes Sociales":5,"Web Form":14,"Whatsaap":20},"interests":{"Bodegas":85,"Locales":66,"Consultorio":25,"Oficinas":41,"Departamentos Toluca":15},"locations":{"Col Del Valle":1,"Clavel":1,"Pasaje Ferreria":2,"Eduardo Molina Ii":1,"Norte 45":1,"Upt Juarez":1},"social":{"Vallejo":12,"Ferreria":45,"Ppnp":15,"Molino":25,"Padel":20},"toluca":{"Locales":9,"Departamentos":8,"Padel":10}},"marketingClosures":[{"month":"MAYO","company":"LED CONTROL","medium":"Google Web","value":14400000,"representative":"Alejandro Ubando"},{"month":"MAYO","company":"AUTO TYRE","medium":"Google Web","value":4380000,"representative":"Alejandro Ubando"},{"month":"MAYO","company":"TRISTAR","medium":"Google Web","value":540000,"representative":"Fernanda Aguilar"}],"brokerClosures":[{"month":"MAYO","company":"RISOUL Y CIA","medium":"Broker","origin":"Broker","leadType":"Propio","value":23713920,"representative":"Linda Martín"}],"records":[{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel B1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"FARMACIAS DE CONFIANZA/SIMILARES","contact":"GRISELDA MARTINEZ","property":"Local","zone":"Ferreria Local 4b","source":"Inbout","mrr":24300,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"LED CONTROL","contact":"FRANCISCO AMADOR","property":"Bodega","zone":"Eduardo Molina 2 Bodega 2","source":"Google","mrr":400000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"RISOUL Y CIA","contact":"DIEGO GARZA MEDELLIN","property":"Bodega","zone":"Norte 45 Bodega 3","source":"Cliente Activo / Broker","mrr":658720,"probability":0,"representative":"Linda Martín"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"AUTO TYRE","contact":"ADRIANA FONSECA","property":"Local","zone":"Utp Juárez Local 4","source":"Web","mrr":73000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"CON CHALE","contact":"OSWALDO LOPEZ","property":"Local","zone":"Ferreria Local 2","source":"Inbout","mrr":20036,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"TRISTAR","contact":"Melissa Lee","property":"Oficina 2","zone":"Niza 77","source":"Web","mrr":45000,"probability":1,"representative":"Fernanda Aguilar"}]},{"name":"JUNIO","label":"Junio","order":6,"sheet":" RESUMEN JUNIO","leads":198,"closed":7,"mrr":1678395,"monthlyGoal":516666.67,"annualGoal":6200000,"responseDays":23,"sellers":{"Lic. Miguel":572560,"Fernanda Aguilar":332636,"Alejandro Ubando":753163,"Nancy":20036},"sections":{"origin":{"Directo":188,"Broker":10},"propertyRevenue":{"Bodegas":700163,"Locales":775196,"Oficinas":73036},"media":{"Ia De Busquedas":31,"Google Form":70,"Chat Ai":18,"Llamadas De Google":15,"Publicidad Exterior":25,"Redes Sociales":5,"Web Form":20,"Whatsaap":14},"interests":{"Bodegas":84,"Locales":65,"Consultorio":9,"Oficinas":40},"locations":{"Col Del Valle":1,"Niza":1,"Clavel":2,"Molina I":1,"Molina Ii":1,"Masarik":1},"social":{"Vallejo":12,"Ferreria":90,"Ppnp":15,"Molino":38,"Padel":23},"toluca":{"Locales":10,"Departamentos":15,"Padel":9}},"marketingClosures":[{"month":"JUNIO","company":"COMERCIALIZADORA PLANCO/TOMBOO","medium":"Google Web","value":11974896,"representative":"Fernanda Aguilar"}],"brokerClosures":[{"month":"JUNIO","company":"LESPAGO","medium":"Broker","origin":"Broker","leadType":"Propio","value":4248000,"representative":"Nancy"}],"records":[{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"COMERCIALIZADORA PLANCO/TOMBOO","contact":"ELIZABETH MARTINEZ","property":"Local","zone":"Col Del Valle Local 1","source":"Web","mrr":332636,"probability":1,"representative":"Fernanda Aguilar"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"BIENQUE","contact":"DYLAN ALEXIS CID MARTINEZ","property":"Oficina","zone":"Niza Piso 7","source":"Cliente Activo","mrr":53000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel Bodega 1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"DU JINQUAN","contact":"DU JINQUAN","property":"Bodega","zone":"Molina 2","source":"Inbout","mrr":265363,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"ENTRETENIMIENTO DIGITAL","contact":"ENTRETENIMIENTO DIGITAL","property":"Bodega","zone":"Clavel 3","source":"Cliente Activo","mrr":85000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"KIA","contact":"KURE MOTORS","property":"Local","zone":"Edu Molina 1 Local 2","source":"Cliente Activo","mrr":442560,"probability":1,"representative":"Lic. Miguel"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"LESPAGO","contact":"LESPAGO / NANCY CONTRERAS","property":"Oficina","zone":"Masaryk Piso 10a","source":"Broker","mrr":20036,"probability":1,"representative":"Nancy"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"USTORAGE","contact":"USTORAGE","property":"Local","zone":"Col Del Valle","source":"Inbout","mrr":130000,"probability":1,"representative":"Lic. Miguel"}]}],"records":[{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Revnoc","contact":"Estela Xu","property":"Oficina","zone":"Piso 7a De Lerma","source":"Inmuebles 24","mrr":40000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Importadora Ferka","contact":"Tere Balderrama","property":"Bodega","zone":"Moresa 1 C2","source":"Web / Google","mrr":75000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Kefei Hong","contact":"Kefei Hong","property":"Bodega","zone":"Bodega 17 C - Corona","source":"Inbout","mrr":123000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Lumoga","contact":"Lucero Arzola Hernandez","property":"Locales Comerciales","zone":"Local 6 Ferreria","source":"Inbout","mrr":20160,"probability":1,"representative":"Alejandro Ubando"},{"month":"ENERO","order":1,"sheet":"DE RESUMEN ENERO","company":"Maíz Urbano","contact":"Fernando Palacios","property":"Isla","zone":"Parques Plaza Nuevo Polanco","source":"Web / Google","mrr":16000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"COMERCIALIZADORA KRAM","contact":"KRAM","property":"Bodega","zone":"Independencia Bodega 4","source":"Active Clients","mrr":151200,"probability":1,"representative":"Linda Martín"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"EDICIONES DE COMPUTACIÓN","contact":"EDICOM","property":"Oficina","zone":"Malta Edif Gris Piso 1","source":"Inbout","mrr":25000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"MARCO ADRIAN HERNADEZ LEMUS","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340 Piso 7a-1","source":"Inbout","mrr":28800,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"REAL TURF","contact":"ELIETH VELOZ","property":"Bodega","zone":"Vallejo Nte 45","source":"Lona","mrr":402150,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"ELS LOGITIC","contact":"ELS","property":"Oficina","zone":"Horacio 340 Piso 7a-2","source":"Web","mrr":60000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"KELLY CELIC GRANADOS M.","contact":"KELLY CELIC","property":"Local","zone":"Pasaje Ferreria Local 28","source":"Inbout","mrr":27000,"probability":1,"representative":"Alejandro Ubando"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"HERRAJES Y ACABADOS","contact":"HAMSA","property":"Bodega","zone":"Parque Norte 45","source":"Web","mrr":558580,"probability":1,"representative":"Fernanda Aguilar"},{"month":"FEBRERO","order":2,"sheet":"RESUMEN FEBRERO","company":"TRI STAR INTERNATIONAL","contact":"Melissa Lee","property":"Oficina","zone":"Niza 77","source":"Web","mrr":55000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"MONUMENTAL FOOD","contact":"David Garay","property":"Local","zone":"Polanco","source":"Inbout","mrr":24000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"EL PESCADITO","contact":"CARLOS MORALES HASSANILE","property":"Local","zone":"Polanco","source":"Llamada Google","mrr":47500,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"ENTRETENIMIENTO DIGITAL","contact":"MARCO ADRIAN","property":"Oficina","zone":"Horacio 340","source":"Inbout","mrr":68000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"JIE IMPORT","contact":"JIE IMPORT SA .DE .CV","property":"Bodega","zone":"Vallejo Nte 45","source":"Active Clients","mrr":190000,"probability":1,"representative":"Veronica"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"LI HAIFENG","contact":"ZHUYI RAMEN","property":"Local","zone":"Polanco","source":"Lona","mrr":26000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MARZO","order":3,"sheet":" RESUMEN MARZO","company":"MEDYSIN","contact":"MEDICAMENTOS Y SERVICIOS INTEGRALES DEL NORESTE","property":"Bodega","zone":"Vallejo Nte 45","source":"Lona","mrr":142000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PASTES KIKOS","contact":"SUGAR TREAT HOUSE","property":"Local","zone":"Ferreria Local 4a","source":"Inbout","mrr":23000,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"PROTEINAS","contact":"HUGO GONZÁLEZ VARGAS","property":"Isla","zone":"Ferreria Isla K08","source":"Inbout","mrr":7500,"probability":1,"representative":"Alejandro Ubando"},{"month":"ABRIL","order":4,"sheet":"RESUMEN ABRIL","company":"FINANCIERA MEXICO/ JOINED","contact":"SUSANA MORALES","property":"Oficina","zone":"Horacio 340 Ph","source":"Web","mrr":166800,"probability":1,"representative":"Fernanda Aguilar"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel B1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"FARMACIAS DE CONFIANZA/SIMILARES","contact":"GRISELDA MARTINEZ","property":"Local","zone":"Ferreria Local 4b","source":"Inbout","mrr":24300,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"LED CONTROL","contact":"FRANCISCO AMADOR","property":"Bodega","zone":"Eduardo Molina 2 Bodega 2","source":"Google","mrr":400000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"RISOUL Y CIA","contact":"DIEGO GARZA MEDELLIN","property":"Bodega","zone":"Norte 45 Bodega 3","source":"Cliente Activo / Broker","mrr":658720,"probability":0,"representative":"Linda Martín"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"AUTO TYRE","contact":"ADRIANA FONSECA","property":"Local","zone":"Utp Juárez Local 4","source":"Web","mrr":73000,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"CON CHALE","contact":"OSWALDO LOPEZ","property":"Local","zone":"Ferreria Local 2","source":"Inbout","mrr":20036,"probability":1,"representative":"Alejandro Ubando"},{"month":"MAYO","order":5,"sheet":" RESUMEN MAYO","company":"TRISTAR","contact":"Melissa Lee","property":"Oficina 2","zone":"Niza 77","source":"Web","mrr":45000,"probability":1,"representative":"Fernanda Aguilar"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"COMERCIALIZADORA PLANCO/TOMBOO","contact":"ELIZABETH MARTINEZ","property":"Local","zone":"Col Del Valle Local 1","source":"Web","mrr":332636,"probability":1,"representative":"Fernanda Aguilar"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"BIENQUE","contact":"DYLAN ALEXIS CID MARTINEZ","property":"Oficina","zone":"Niza Piso 7","source":"Cliente Activo","mrr":53000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"CIBANCO","contact":"CIBANCO INSTITUCION DE BANCA MULTIPLE","property":"Bodega","zone":"Clavel Bodega 1","source":"Inbout","mrr":349800,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"DU JINQUAN","contact":"DU JINQUAN","property":"Bodega","zone":"Molina 2","source":"Inbout","mrr":265363,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"ENTRETENIMIENTO DIGITAL","contact":"ENTRETENIMIENTO DIGITAL","property":"Bodega","zone":"Clavel 3","source":"Cliente Activo","mrr":85000,"probability":1,"representative":"Alejandro Ubando"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"KIA","contact":"KURE MOTORS","property":"Local","zone":"Edu Molina 1 Local 2","source":"Cliente Activo","mrr":442560,"probability":1,"representative":"Lic. Miguel"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"LESPAGO","contact":"LESPAGO / NANCY CONTRERAS","property":"Oficina","zone":"Masaryk Piso 10a","source":"Broker","mrr":20036,"probability":1,"representative":"Nancy"},{"month":"JUNIO","order":6,"sheet":" RESUMEN JUNIO","company":"USTORAGE","contact":"USTORAGE","property":"Local","zone":"Col Del Valle","source":"Inbout","mrr":130000,"probability":1,"representative":"Lic. Miguel"}],"warnings":["Febrero: Origen del Contacto clasifica 85 registros frente a 86 leads declarados.","Marzo: Medio clasifica 196 registros frente a 162 leads declarados.","Abril: Intereses clasifica 70 registros frente a 76 leads declarados."]};
 
 </script><script data-source="assets/js/config.js">
 (function (root) {
@@ -620,6 +674,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       media: ["MEDIO", "MEDIOS"],
       interests: ["INTERESES", "INTERES"],
       locations: ["UBICACIONES", "UBICACION"],
+      marketingClosureRevenue: ["GANANCIA POR CIERRE CORRESPONDIENTE A MEDIOS DE MARKETING", "GANANCIA POR CIERRE DE CONTRATO CORRESPONDIENTE A MEDIOS DE MARKETING"],
       response: ["TIEMPO DE RESPUESTA"],
       social: ["REDES SOCIALES SEGUIDORES", "SEGUIDORES DE REDES SOCIALES"],
       toluca: ["TOLUCA LEADS MOLINO", "TOLUCA"]
@@ -648,11 +703,27 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
   const canonicalRepresentative = value => {
     const key = normalize(value);
     if (key.includes("ALEJANDRO")) return "Alejandro Ubando";
-    if (key.includes("FERNANDA")) return "Fernanda Aguilar";
+    if (key.includes("FERNANDA") || key.includes("FERNADA")) return "Fernanda Aguilar";
     if (key.includes("LINDA")) return "Linda Martín";
     if (key.includes("MIGUEL")) return "Lic. Miguel";
     if (key.includes("NANCY")) return "Nancy";
     return title(value || "Sin asignar");
+  };
+  const canonicalProperty = value => {
+    const key = normalize(value).replace(/[^A-Z0-9]+/g, " ").trim();
+    if (/^BODEGAS?$/.test(key)) return "Bodega";
+    return title(value || "Sin clasificar");
+  };
+  const canonicalMarketingMedium = value => {
+    const key = normalize(value).replace(/[^A-Z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+    if (key.includes("INMUEBLES 24")) return "Inmuebles 24";
+    if (key.includes("LONA")) return "Lona";
+    if (key.includes("GOOGLE") && key.includes("LLAMADA")) return "Llamada Google";
+    if (key.includes("GOOGLE") && key.includes("WEB")) return "Google Web";
+    if (key === "GOOGLE") return "Google Web";
+    if (key.includes("WEB") && key.includes("DIRECTO")) return "Web / Directo";
+    if (key === "WEB") return "Web";
+    return title(value || "Sin clasificar");
   };
   const sum = (items, selector) => items.reduce((total, item) => total + (Number(selector(item)) || 0), 0);
   const aggregate = (items, keySelector, valueSelector = () => 1) => {
@@ -670,7 +741,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
   const entries = (map, limit = 99) => Object.entries(map || {}).map(([name, value]) => ({ name, value: Number(value) || 0 })).sort((a, b) => b.value - a.value).slice(0, limit);
   const unique = values => [...new Set(values.filter(Boolean))];
   const escapeHtml = value => clean(value).replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[char]));
-  VP.Utils = { clean, normalize, number, title, money, compactMoney, integer, decimal, percent, monthName, canonicalRepresentative, sum, aggregate, mergeMaps, entries, unique, escapeHtml };
+  VP.Utils = { clean, normalize, number, title, money, compactMoney, integer, decimal, percent, monthName, canonicalRepresentative, canonicalProperty, canonicalMarketingMedium, sum, aggregate, mergeMaps, entries, unique, escapeHtml };
 })(globalThis);
 
 </script><script data-source="assets/js/workbook-parser.js">
@@ -698,6 +769,74 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       const value = U.number(rows[index][1]);
       if (!value && rows[index][1] == null) continue;
       result[U.title(label)] = (result[U.title(label)] || 0) + value;
+    }
+    return result;
+  };
+  const findMarketingClosureSection = rows => rows.findIndex(row => row.some(cell => aliases.marketingClosureRevenue.some(name => U.normalize(cell).startsWith(U.normalize(name)))));
+  const marketingClosureRevenue = (rows, month) => {
+    const start = findMarketingClosureSection(rows);
+    if (start < 0) return [];
+    let headerIndex = -1;
+    for (let index = start + 1; index < Math.min(rows.length, start + 9); index += 1) {
+      const normalized = rows[index].map(U.normalize);
+      if (normalized.includes("EMPRESA") && normalized.includes("MEDIO")) { headerIndex = index; break; }
+    }
+    if (headerIndex < 0) return [];
+    const headers = rows[headerIndex].map(U.normalize);
+    const companyIndex = headers.findIndex(value => value === "EMPRESA");
+    const representativeIndex = headers.findIndex(value => /^CERR/.test(value));
+    const mediumIndex = headers.findIndex((value, index) => value === "MEDIO" && index > companyIndex);
+    const amountIndexes = headers.map((value, index) => (index > mediumIndex && (representativeIndex < 0 || index < representativeIndex) && /(GANANCIA|MONTO)/.test(value) ? index : -1)).filter(index => index >= 0);
+    const result = [];
+    for (let index = headerIndex + 1; index < rows.length; index += 1) {
+      if (rows[index].some(cell => /^TOTAL(?: DE)? MARKETING$/i.test(U.clean(cell)))) break;
+      const company = U.clean(rows[index][companyIndex]);
+      const medium = U.clean(rows[index][mediumIndex]);
+      if (!company || !medium || U.normalize(company) === "EMPRESA") continue;
+      const value = U.sum(amountIndexes, column => U.number(rows[index][column]));
+      if (!value) continue;
+      result.push({
+        month,
+        company,
+        medium: U.canonicalMarketingMedium(medium),
+        value,
+        representative: U.canonicalRepresentative(rows[index][representativeIndex])
+      });
+    }
+    return result;
+  };
+  const brokerClosureRevenue = (rows, month) => {
+    const marketingStart = findMarketingClosureSection(rows);
+    if (marketingStart < 0) return [];
+    const start = rows.findIndex((row, index) => index > marketingStart && row.some(cell => U.normalize(cell) === "BROKER"));
+    if (start < 0) return [];
+    let headerIndex = -1;
+    for (let index = start + 1; index < Math.min(rows.length, start + 7); index += 1) {
+      const normalized = rows[index].map(U.normalize);
+      if (normalized.includes("EMPRESA") && normalized.includes("MEDIO")) { headerIndex = index; break; }
+    }
+    if (headerIndex < 0) return [];
+    const headers = rows[headerIndex].map(U.normalize);
+    const companyIndex = headers.findIndex(value => value === "EMPRESA");
+    const mediumIndex = headers.findIndex((value, index) => value === "MEDIO" && index > companyIndex);
+    const representativeIndex = headers.findIndex(value => /^CERR/.test(value));
+    const amountIndexes = headers.map((value, index) => (index > mediumIndex && (representativeIndex < 0 || index < representativeIndex) && /(GANANCIA|MONTO)/.test(value) ? index : -1)).filter(index => index >= 0);
+    const result = [];
+    for (let index = headerIndex + 1; index < Math.min(rows.length, headerIndex + 12); index += 1) {
+      const company = U.clean(rows[index][companyIndex]);
+      const medium = U.clean(rows[index][mediumIndex]);
+      const value = U.sum(amountIndexes, column => U.number(rows[index][column]));
+      if (!company || !medium || !value) continue;
+      const representative = representativeIndex >= 0 ? U.clean(rows[index][representativeIndex]) : "";
+      result.push({
+        month,
+        company,
+        medium: "Broker",
+        origin: U.normalize(medium).includes("WEB") ? "Web" : "Broker",
+        leadType: U.normalize(medium).includes("WEB") ? "Lead Web" : "Propio",
+        value,
+        representative: representative ? U.canonicalRepresentative(representative) : ""
+      });
     }
     return result;
   };
@@ -752,7 +891,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       if (!company) continue;
       records.push({
         month, order: VP.Config.months.indexOf(month) + 1, sheet: sheetName, company,
-        contact: U.clean(rows[row][columns.contact]), property: U.title(rows[row][columns.property] || "Sin clasificar"),
+        contact: U.clean(rows[row][columns.contact]), property: U.canonicalProperty(rows[row][columns.property]),
         zone: U.title(rows[row][columns.zone] || "Sin ubicación"), source: U.title(rows[row][columns.source] || "Sin fuente"),
         mrr: U.number(rows[row][columns.mrr]), probability: U.number(rows[row][columns.probability]) > 1 ? U.number(rows[row][columns.probability]) / 100 : U.number(rows[row][columns.probability]),
         representative: U.canonicalRepresentative(rows[row][columns.representative])
@@ -776,6 +915,15 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     const month = U.monthName(`${sheetName} ${rows[1]?.[0] || ""}`);
     if (!month) return null;
     const records = parseRecords(rows, month, sheetName);
+    const brokerClosures = brokerClosureRevenue(rows, month).map(item => {
+      if (item.representative) return item;
+      const key = U.normalize(item.company).replace(/[^A-Z0-9]+/g, " ").trim();
+      const related = records.find(record => [record.company, record.contact].some(value => {
+        const candidate = U.normalize(value).replace(/[^A-Z0-9]+/g, " ").trim();
+        return key && candidate && (key === candidate || key.includes(candidate) || candidate.includes(key));
+      }));
+      return { ...item, representative: related?.representative || "Sin asignar" };
+    });
     const leads = metric(rows, [/^LEADS? ENTRANTES$/]);
     const closed = metric(rows, [/^LEADS? CERRADOS$/]) || records.length;
     const detailMrr = U.sum(records, record => record.mrr);
@@ -788,6 +936,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
         origin: sectionMap(rows, aliases.origin), propertyRevenue: sectionMap(rows, aliases.propertyRevenue), media: sectionMap(rows, aliases.media),
         interests: sectionMap(rows, aliases.interests), locations: sectionMap(rows, aliases.locations), social: sectionMap(rows, aliases.social), toluca: sectionMap(rows, aliases.toluca)
       },
+      marketingClosures: marketingClosureRevenue(rows, month),
+      brokerClosures,
       records
     };
   };
@@ -805,11 +955,32 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     });
     return map;
   };
+  const generalMarketingClosureMap = rows => {
+    const start = rows.findIndex(row => row.some(cell => aliases.marketingClosureRevenue.some(name => U.normalize(cell).startsWith(U.normalize(name)))));
+    if (start < 0) return {};
+    let headerIndex = -1;
+    for (let index = start + 1; index < Math.min(rows.length, start + 6); index += 1) {
+      const normalized = rows[index].map(U.normalize);
+      if (normalized.includes("MES") && normalized.some(value => value.includes("EQUIPO") && value.includes("CIERRE"))) { headerIndex = index; break; }
+    }
+    if (headerIndex < 0) return {};
+    const headers = rows[headerIndex].map(U.normalize);
+    const monthIndex = headers.findIndex(value => value === "MES");
+    const totalIndex = headers.findIndex(value => value.includes("EQUIPO") && value.includes("CIERRE"));
+    const result = {};
+    for (let index = headerIndex + 1; index < rows.length; index += 1) {
+      const month = U.monthName(rows[index][monthIndex]);
+      if (!month) continue;
+      result[month] = U.number(rows[index][totalIndex]);
+    }
+    return result;
+  };
   const fromWorkbook = (workbook, sourceName = "Archivo Excel") => {
     const sheets = workbook.SheetNames.map(name => ({ name, rows: root.XLSX.utils.sheet_to_json(workbook.Sheets[name], { header: 1, defval: null, raw: true }) }));
     const months = sheets.filter(sheet => isMonthlySheet(sheet.name)).map(sheet => parseMonth(sheet.name, sheet.rows)).filter(Boolean).sort((a, b) => a.order - b.order);
     if (!months.length) throw new Error("No se encontraron hojas cuyo nombre comience con RESUMEN.");
     const general = generalMap(sheets.find(sheet => U.normalize(sheet.name) === "GENERAL")?.rows || []);
+    const generalMarketingClosures = generalMarketingClosureMap(sheets.find(sheet => U.normalize(sheet.name) === "GENERAL")?.rows || []);
     const warnings = [];
     months.forEach(month => {
       const annual = general[month.name];
@@ -823,6 +994,9 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       checks.forEach(([label, classified]) => {
         if (classified !== month.leads) warnings.push(`${month.label}: ${label} clasifica ${classified} registros frente a ${month.leads} leads declarados.`);
       });
+      const detailedMarketingRevenue = U.sum(month.marketingClosures || [], item => item.value);
+      const generalMarketingRevenue = generalMarketingClosures[month.name] || 0;
+      if (generalMarketingRevenue && Math.abs(generalMarketingRevenue - detailedMarketingRevenue) > 1) warnings.push(`${month.label}: la ganancia por medios suma ${U.money(detailedMarketingRevenue)} en el detalle mensual y ${U.money(generalMarketingRevenue)} en GENERAL.`);
     });
     return { year: VP.Config.year, updatedAt: new Date().toISOString(), sourceName, months, records: months.flatMap(month => month.records), warnings };
   };
@@ -900,11 +1074,33 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     if (filters.location !== "TODAS" && !locationMatches(record.zone, filters.location)) return false;
     return true;
   };
+  const companyKey = value => U.normalize(value).replace(/\b(SA|SAPI|DE|CV|S|A)\b/g, " ").replace(/[^A-Z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+  const companyMatches = (left, right) => {
+    const a = companyKey(left);
+    const b = companyKey(right);
+    return Boolean(a && b && (a === b || a.includes(b) || b.includes(a)));
+  };
+  const marketingClosureMatches = (item, periodRecords, filters) => {
+    if (filters.advisor !== "TODOS" && advisorGroup(item.representative) !== filters.advisor) return false;
+    if (filters.property === "TODAS" && filters.location === "TODAS") return true;
+    return periodRecords.some(record => record.month === item.month && companyMatches(record.company, item.company) && recordMatches(record, { ...filters, advisor: "TODOS" }));
+  };
+  const brokerClosureMatches = (item, periodRecords, filters) => {
+    const related = periodRecords.filter(record => record.month === item.month && (companyMatches(record.company, item.company) || companyMatches(record.contact, item.company)));
+    if (filters.advisor !== "TODOS") {
+      const directMatch = item.representative && advisorGroup(item.representative) === filters.advisor;
+      if (!directMatch && !related.some(record => advisorGroup(record.representative) === filters.advisor)) return false;
+    }
+    if (filters.property !== "TODAS" || filters.location !== "TODAS") return related.some(record => recordMatches(record, { ...filters, advisor: "TODOS" }));
+    return true;
+  };
   const createScope = (model, filters) => {
     const months = filters.month === "GENERAL" ? model.months : model.months.filter(month => month.name === filters.month);
     const names = new Set(months.map(month => month.name));
     const periodRecords = model.records.filter(record => names.has(record.month));
     const records = periodRecords.filter(record => recordMatches(record, filters));
+    const marketingClosures = months.flatMap(month => month.marketingClosures || []).filter(item => marketingClosureMatches(item, periodRecords, filters));
+    const brokerClosures = months.flatMap(month => month.brokerClosures || []).filter(item => brokerClosureMatches(item, periodRecords, filters));
     const map = key => U.mergeMaps(months.map(month => month.sections[key]));
     const detailFiltered = filters.advisor !== "TODOS" || filters.property !== "TODAS" || filters.location !== "TODAS";
     const allLocations = canonicalLocationMap(map("locations"));
@@ -912,7 +1108,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       ? allLocations
       : Object.fromEntries(Object.entries(allLocations).filter(([name]) => U.normalize(canonicalLocation(name) || name) === U.normalize(filters.location)));
     return {
-      filters, months, periodRecords, records, detailFiltered,
+      filters, months, periodRecords, records, marketingClosures, brokerClosures, detailFiltered,
       leads: U.sum(months, month => month.leads),
       closed: detailFiltered ? records.length : U.sum(months, month => month.closed),
       revenue: U.sum(records, record => record.mrr),
@@ -940,6 +1136,18 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
   const datasets = scope => {
     const properties = U.aggregate(scope.records, record => record.property, record => record.mrr);
     const propertyCounts = U.aggregate(scope.records, record => record.property);
+    const marketingClosureMap = U.aggregate(scope.marketingClosures, item => item.medium, item => item.value);
+    const marketingClosureMedia = U.entries(marketingClosureMap, 20);
+    const marketingClosureProduction = U.entries(U.aggregate(scope.marketingClosures, item => item.representative || "Sin asignar", item => item.value), 20);
+    const brokerClosureCompanies = U.entries(U.aggregate(scope.brokerClosures, item => `${item.company} · ${item.leadType || (U.normalize(item.origin) === "WEB" ? "Lead Web" : "Propio")}`, item => item.value), 20);
+    const marketingClosureTrend = {
+      labels: scope.months.map(month => month.label.slice(0, 3)),
+      fullLabels: scope.months.map(month => month.label),
+      series: marketingClosureMedia.map(medium => ({
+        name: medium.name,
+        data: scope.months.map(month => U.sum(scope.marketingClosures.filter(item => item.month === month.name && U.normalize(item.medium) === U.normalize(medium.name)), item => item.value))
+      }))
+    };
     return {
       production: ["Alejandro", "Fernanda", "Linda", "Miguel", "Otros"].map(name => ({ name, value: U.sum(scope.records.filter(record => advisorGroup(record.representative) === name), record => record.mrr) })),
       origin: orderedMap(scope.origin, ["Directo", "Broker"]),
@@ -947,7 +1155,14 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       media: U.entries(scope.media, 20), interests: U.entries(scope.interests, 20), locations: U.entries(scope.locations, 20),
       response: scope.months.map(month => ({ name: month.label.slice(0, 3), fullName: month.label, value: month.responseDays })),
       social: orderedMap(scope.social, ["Vallejo", "Ferreria", "PPNP", "Molino", "Padel"]),
-      molino: orderedMap(scope.molino, ["Locales", "Departamentos", "Padel"])
+      molino: orderedMap(scope.molino, ["Locales", "Departamentos", "Padel"]),
+      marketingClosureMedia,
+      marketingClosureProduction,
+      marketingClosureTrend,
+      marketingClosureTotal: U.sum(scope.marketingClosures, item => item.value),
+      brokerClosureCompanies,
+      brokerClosureTrend: scope.months.map(month => ({ name: month.label.slice(0, 3), fullName: month.label, value: U.sum(scope.brokerClosures.filter(item => item.month === month.name), item => item.value) })),
+      brokerClosureTotal: U.sum(scope.brokerClosures, item => item.value)
     };
   };
   const responseSummary = scope => {
@@ -971,6 +1186,13 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
   ].map(quarter => {
     const months = model.months.filter(month => quarter.orders.includes(month.order));
     const records = months.flatMap(month => month.records);
+    const marketingClosures = months.flatMap(month => month.marketingClosures || []);
+    const brokerClosures = months.flatMap(month => month.brokerClosures || []);
+    const brokerCompanyMap = brokerClosures.reduce((result, item) => {
+      const label = `${item.company} · ${item.leadType || (U.normalize(item.origin) === "WEB" ? "Lead Web" : "Propio")}`;
+      result[label] = (result[label] || 0) + item.value;
+      return result;
+    }, {});
     const grouped = new Map([["Alejandro", 0], ["Fernanda", 0], ["Otros", 0]]);
     records.forEach(record => {
       const group = advisorGroup(record.representative);
@@ -987,7 +1209,19 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
       interests: ranking("interests"),
       locations: ranking("locations"),
       social: U.entries(U.mergeMaps(months.map(month => month.sections.social)), 5),
-      molino: U.entries(U.mergeMaps(months.map(month => month.sections.toluca)), 3)
+      molino: U.entries(U.mergeMaps(months.map(month => month.sections.toluca)), 3),
+      marketingClosureMedia: U.entries(U.aggregate(marketingClosures, item => item.medium, item => item.value), 5),
+      marketingClosureTotal: U.sum(marketingClosures, item => item.value),
+      brokerClosureCompanies: U.entries(brokerCompanyMap, 5),
+      brokerClosureTotal: U.sum(brokerClosures, item => item.value),
+      brokerClosureLabel: brokerClosures.length && brokerClosures.every(item => U.normalize(item.origin) === "WEB") ? "Ganancia contractual Broker por Web" : "Ganancia contractual Broker",
+      monthlyAdvisors: months.map(month => ({
+        month: month.label,
+        values: ["Alejandro", "Fernanda", "Otros"].map(name => ({ name, value: U.sum(month.records.filter(record => {
+          const group = advisorGroup(record.representative);
+          return name === "Otros" ? group !== "Alejandro" && group !== "Fernanda" : group === name;
+        }), record => record.mrr) }))
+      }))
     };
   });
   VP.Analytics = { advisorGroup, canonicalLocation, recordMatches, createScope, variation, datasets, responseSummary, filterOptions, quarterlyRankings };
@@ -1038,7 +1272,31 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     type: "line", data: { labels: items.map(item => item.name), datasets: [{ label: "Días", data: items.map(item => item.value), borderColor: palette[0], backgroundColor: palette[0], borderWidth: 2, pointRadius: 2.5, pointHoverRadius: 4, pointBorderWidth: 2, pointBorderColor: "#FFFFFF", pointBackgroundColor: palette[0], cubicInterpolationMode: "monotone", tension: .08, fill: false }] },
     options: { ...base, plugins: { ...base.plugins, legend: { display: false } }, scales: { x: base.scales.x, y: { ...base.scales.y, suggestedMax: options.suggestedMax || 30, ticks: { ...base.scales.y.ticks, callback: value => `${value}${options.suffix || " d"}` } } } }
   });
-  VP.Charts = { bar, doughnut, line, destroyAll: () => Object.keys(registry).forEach(destroy) };
+  const stackedBar = (id, model) => create(id, {
+    type: "bar",
+    data: {
+      labels: model.labels,
+      datasets: model.series.map((series, index) => ({
+        label: series.name,
+        data: series.data,
+        backgroundColor: palette[Math.min(index, palette.length - 1)],
+        borderSkipped: false,
+        borderRadius: 3,
+        categoryPercentage: .7,
+        barPercentage: .72,
+        maxBarThickness: 42
+      }))
+    },
+    options: {
+      ...base,
+      plugins: { ...base.plugins, legend: { ...base.plugins.legend, position: "bottom" } },
+      scales: {
+        x: { ...base.scales.x, stacked: true },
+        y: { ...base.scales.y, stacked: true, ticks: { ...base.scales.y.ticks, callback: moneyTick } }
+      }
+    }
+  });
+  VP.Charts = { bar, doughnut, line, stackedBar, destroyAll: () => Object.keys(registry).forEach(destroy) };
 })(globalThis);
 
 </script><script data-source="assets/js/tables.js">
@@ -1057,6 +1315,16 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     const total = U.sum(items, item => item.value);
     return rows + `<div class="metric-row metric-row-total"><span>${U.escapeHtml(options.totalLabel)}</span>${options.hideTotalValue ? "" : `<strong>${formatter(total)}</strong>`}</div>`;
   };
+  const contractTable = (items, options = {}) => {
+    if (!items.length) return '<div class="empty-state contract-empty">Sin cierres contractuales para la selección</div>';
+    const rows = [...items].sort((a, b) => b.value - a.value).map(item => {
+      const channel = options.broker
+        ? (item.leadType || (U.normalize(item.origin) === "WEB" ? "Lead Web" : "Propio"))
+        : item.medium;
+      return `<tr><td>${U.escapeHtml(U.title(item.month))}</td><td>${U.escapeHtml(item.company)}</td><td>${U.escapeHtml(channel || "Sin clasificar")}</td><td>${U.escapeHtml(item.representative || "Sin asignar")}</td><td class="text-end data-mrr">${U.money(item.value)}</td></tr>`;
+    }).join("");
+    return `<div class="contract-table-wrap"><table class="contract-table"><thead><tr><th>Mes</th><th>Empresa</th><th>${options.broker ? "Tipo de lead" : "Medio de marketing"}</th><th>Vendedor</th><th>Ganancia contractual</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  };
   const renderExecutive = records => {
     currentRecords = [...records].sort((a, b) => b.mrr - a.mrr);
     if (dataTable) { dataTable.destroy(); dataTable = null; }
@@ -1072,7 +1340,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     const workbook = root.XLSX.utils.book_new(); root.XLSX.utils.book_append_sheet(workbook, sheet, "Detalle Comercial");
     root.XLSX.writeFile(workbook, `Vallejo_Detalle_Comercial_${new Date().toISOString().slice(0,10)}.xlsx`); return true;
   };
-  VP.Tables = { metricRows, renderExecutive, exportExcel, getRecords: () => [...currentRecords] };
+  VP.Tables = { metricRows, contractTable, renderExecutive, exportExcel, getRecords: () => [...currentRecords] };
 })(globalThis);
 
 </script><script data-source="assets/js/ui.js">
@@ -1094,8 +1362,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     : `${value > 0 ? "↑" : value < 0 ? "↓" : "→"} ${U.percent(Math.abs(value))} vs. mes anterior`;
   const optionHtml = (value, label) => `<option value="${U.escapeHtml(value)}">${U.escapeHtml(label)}</option>`;
 
-  const renderKpis = (model, scope) => {
-    const production = A.datasets(scope).production.slice().sort((a, b) => b.value - a.value);
+  const renderKpis = (model, scope, datasets) => {
+    const production = datasets.production.slice().sort((a, b) => b.value - a.value);
     const featured = production.find(item => item.value > 0);
     setText("leadsValue", U.integer(scope.leads));
     setText("leadsVariation", `Calificados y no calificados · ${trend(A.variation(model, scope, "leads"))}`);
@@ -1105,6 +1373,10 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     setText("featuredSellerContext", featured ? `${U.money(featured.value)} de producción` : "Sin producción en el periodo");
     setText("revenueValue", U.money(scope.revenue));
     setText("revenueVariation", trend(A.variation(model, scope, "revenue")));
+    setText("marketingLeadsRevenueValue", U.money(datasets.marketingClosureTotal));
+    const marketingFeatured = datasets.marketingClosureProduction[0];
+    setText("marketingFeaturedSellerValue", marketingFeatured?.name || "—");
+    setText("marketingFeaturedSellerContext", marketingFeatured ? `${U.money(marketingFeatured.value)} en contratos de marketing` : "Sin contratos de marketing en el periodo");
   };
 
   const renderModuleTables = (scope, datasets) => {
@@ -1116,6 +1388,10 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     document.getElementById("locationsTable").innerHTML = T.metricRows(datasets.locations, U.integer, { totalLabel: "Registros" });
     document.getElementById("socialTable").innerHTML = T.metricRows(datasets.social, U.integer, { bars: false });
     document.getElementById("molinoTable").innerHTML = T.metricRows(datasets.molino, U.integer, { bars: false });
+    document.getElementById("marketingClosureTable").innerHTML = T.metricRows(datasets.marketingClosureMedia, U.compactMoney, { totalLabel: "Total generado" });
+    document.getElementById("brokerClosureTable").innerHTML = T.metricRows(datasets.brokerClosureCompanies, U.compactMoney, { totalLabel: "Total Broker" });
+    document.getElementById("marketingClosureDetail").innerHTML = T.contractTable(scope.marketingClosures);
+    document.getElementById("brokerClosureDetail").innerHTML = T.contractTable(scope.brokerClosures, { broker: true });
 
     const response = A.responseSummary(scope);
     const bands = [
@@ -1134,6 +1410,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     setText("responseValue", response.average ? `${U.decimal(response.average)} días` : "—");
     setText("socialTotal", U.integer(total(datasets.social)));
     setText("molinoTotal", U.integer(total(datasets.molino)));
+    setText("marketingClosureTotal", U.money(datasets.marketingClosureTotal));
+    setText("brokerClosureTotal", U.money(datasets.brokerClosureTotal));
   };
 
   const renderCharts = datasets => {
@@ -1146,6 +1424,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     C.line("responseChart", datasets.response, { suffix: " días", suggestedMax: 30 });
     C.bar("socialChart", datasets.social);
     C.bar("molinoChart", datasets.molino);
+    C.stackedBar("marketingClosureChart", datasets.marketingClosureTrend);
+    C.bar("brokerClosureChart", datasets.brokerClosureTrend, { money: true });
   };
 
   const renderQuarterlyRankings = (model, filters) => {
@@ -1153,10 +1433,10 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     const visible = filters.month === "GENERAL";
     section.hidden = !visible;
     if (!visible) return;
-    const rankingList = items => items.length ? items.map((item, index) => `<li><b>${index + 1}</b><span>${U.escapeHtml(item.name)}</span><strong>${U.integer(item.value)}</strong></li>`).join("") : "<li><span>Sin información</span></li>";
+    const rankingList = (items, formatter = U.integer) => items.length ? items.map((item, index) => `<li><b>${index + 1}</b><span>${U.escapeHtml(item.name)}</span><strong>${formatter(item.value)}</strong></li>`).join("") : "<li><span>Sin información</span></li>";
     document.getElementById("quarterlyRankings").innerHTML = A.quarterlyRankings(model).map(quarter => {
-      const advisorRows = quarter.advisors.map((item, index) => `<div class="quarter-advisor-row"><b>${index + 1}</b><span>${U.escapeHtml(item.name)}</span><strong>${U.compactMoney(item.value)}</strong></div>`).join("");
-      return `<article class="quarter-card"><header><div><strong>${quarter.key}</strong><span>${quarter.label}</span></div><small>Datos generales</small></header><div class="quarter-kpis"><div><span>Ganancia</span><strong>${U.money(quarter.gain)}</strong></div><div><span>Leads cerrados</span><strong>${U.integer(quarter.closed)}</strong></div></div><section class="quarter-advisors"><h3>Producción por vendedor</h3>${advisorRows}</section><div class="quarter-categories"><section><h3>Medio</h3><ol>${rankingList(quarter.media)}</ol></section><section><h3>Interés</h3><ol>${rankingList(quarter.interests)}</ol></section><section><h3>Ubicaciones</h3><ol>${rankingList(quarter.locations)}</ol></section></div><div class="quarter-categories quarter-categories-secondary"><section><h3>Redes Sociales</h3><ol>${rankingList(quarter.social)}</ol></section><section><h3>Leads Molino Toluca</h3><ol>${rankingList(quarter.molino)}</ol></section></div></article>`;
+      const monthlyRows = quarter.monthlyAdvisors.map(month => `<div class="quarter-monthly-row"><strong>${U.escapeHtml(month.month)}</strong>${month.values.map(item => `<span>${U.compactMoney(item.value)}</span>`).join("")}</div>`).join("");
+      return `<article class="quarter-card"><header><div><strong>${quarter.key}</strong><span>${quarter.label}</span></div><small>Datos generales</small></header><div class="quarter-kpis"><div><span>General mensual</span><strong>${U.money(quarter.gain)}</strong></div><div><span>Leads cerrados</span><strong>${U.integer(quarter.closed)}</strong></div><div class="quarter-kpi-marketing"><span>Ganancia Marketing<small>Contractual</small></span><strong>${U.money(quarter.marketingClosureTotal)}</strong></div></div><section class="quarter-advisors"><h3>Producción por vendedor mensual</h3><div class="quarter-monthly-head"><span>Mes</span><span>Alejandro</span><span>Fernanda</span><span>Otros</span></div>${monthlyRows}</section><div class="quarter-categories quarter-categories-marketing"><section><h3>Ganancia contractual atribuida a medios de marketing · ${U.compactMoney(quarter.marketingClosureTotal)}</h3><ol>${rankingList(quarter.marketingClosureMedia, U.compactMoney)}</ol></section><section><h3>${U.escapeHtml(quarter.brokerClosureLabel)} · ${U.compactMoney(quarter.brokerClosureTotal)}</h3><ol>${rankingList(quarter.brokerClosureCompanies, U.compactMoney)}</ol></section></div><div class="quarter-categories"><section><h3>Medio</h3><ol>${rankingList(quarter.media)}</ol></section><section><h3>Interés</h3><ol>${rankingList(quarter.interests)}</ol></section><section><h3>Ubicaciones</h3><ol>${rankingList(quarter.locations)}</ol></section></div><div class="quarter-categories quarter-categories-secondary"><section><h3>Redes Sociales</h3><ol>${rankingList(quarter.social)}</ol></section><section><h3>Leads Molino Toluca</h3><ol>${rankingList(quarter.molino)}</ol></section></div></article>`;
     }).join("");
   };
 
@@ -1178,7 +1458,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
   const render = (model, filters) => {
     const scope = A.createScope(model, filters);
     const datasets = A.datasets(scope);
-    renderKpis(model, scope);
+    renderKpis(model, scope, datasets);
     renderModuleTables(scope, datasets);
     renderCharts(datasets);
     renderQuarterlyRankings(model, filters);
@@ -1190,6 +1470,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
     setText("updatedAt", new Intl.DateTimeFormat("es-MX", { dateStyle: "medium", timeStyle: "short" }).format(new Date(model.updatedAt)));
     setText("footerSource", `Fuente: ${model.sourceName}`);
     setText("qualityNote", model.warnings?.length ? `${model.warnings.length} diferencias de clasificación señaladas; los indicadores usan los totales declarados y la ganancia usa el detalle.` : "Datos conciliados con las hojas mensuales.");
+    const marketingWarnings = (model.warnings || []).filter(message => message.includes("ganancia por medios"));
+    setText("marketingClosureNote", `Ganancia contractual atribuida a medios de marketing · Inversión mensual de Google declarada: $50,000${marketingWarnings.length ? ` · ${marketingWarnings.length} diferencia con GENERAL señalada` : ""}`);
     return scope;
   };
 
@@ -1208,7 +1490,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-07-14T00:31:51.736Z",
 (function (root) {
   "use strict";
   const VP = root.VP;
-  const STORAGE_KEY = "vallejo-properties-dashboard-marketing-v3";
+  const STORAGE_KEY = "vallejo-properties-dashboard-marketing-v13";
   const copy = value => JSON.parse(JSON.stringify(value));
   const defaultFilters = model => ({ year: String(model.year || VP.Config.year), month: "GENERAL", advisor: "TODOS", property: "TODAS", location: "TODAS" });
   const readStoredModel = () => {
