@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <!-- Archivo autónomo: no requiere internet ni carpetas adicionales. -->
+  <!-- Interfaz publicada en GitHub Pages y datos centralizados en Supabase. -->
   <title>Marketing BI | Vallejo Properties</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style data-source="vendor/bootstrap.min.css">
 @charset "UTF-8";/*!
  * Bootstrap  v5.3.8 (https://getbootstrap.com/)
@@ -451,6 +452,41 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
+.auth-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(244, 245, 247, .97);
+}
+.auth-card {
+  width: min(100%, 430px);
+  padding: 32px;
+  border: 1px solid var(--gray-200);
+  border-radius: 22px;
+  background: var(--white);
+  box-shadow: 0 18px 50px rgba(47, 47, 47, .12);
+}
+.auth-mark { width: 52px; height: 5px; margin-bottom: 24px; border-radius: 999px; background: var(--orange); }
+.auth-card .eyebrow { margin: 0 0 8px; color: var(--orange-dark); font-size: .72rem; font-weight: 700; letter-spacing: .13em; }
+.auth-card h1 { margin: 0; color: var(--dark); font-size: 1.8rem; font-weight: 700; }
+.auth-card > p { margin: 8px 0 24px; color: var(--gray-600); font-size: .92rem; }
+.auth-form { display: grid; gap: 15px; }
+.auth-form label { display: grid; gap: 7px; color: var(--gray-600); font-size: .78rem; font-weight: 650; }
+.auth-form input { width: 100%; height: 44px; padding: 0 13px; border: 1px solid var(--gray-200); border-radius: 11px; color: var(--dark); background: var(--white); outline: 0; }
+.auth-form input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(245, 130, 32, .12); }
+.auth-form .btn { height: 44px; justify-content: center; margin-top: 3px; }
+.auth-message { min-height: 20px; margin: 0; color: var(--gray-600); font-size: .8rem; }
+.auth-message.error { color: #8a3f16; }
+body.auth-locked { overflow: hidden; }
+body.auth-locked .dashboard-shell { visibility: hidden; }
+.user-session { display: flex; align-items: center; gap: 9px; padding-left: 10px; border-left: 1px solid var(--gray-200); }
+.user-session span { max-width: 180px; overflow: hidden; color: var(--gray-600); font-size: .72rem; text-overflow: ellipsis; white-space: nowrap; }
+.cloud-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--gray-600); font-size: .72rem; }
+.cloud-badge::before { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); content: ""; }
+
 @media print {
   body { background: var(--white); }
   .dashboard-shell { width: 100%; padding: 7mm; }
@@ -468,6 +504,21 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
 </style>
 </head>
 <body>
+  <section id="authLayer" class="auth-layer" aria-labelledby="authTitle" hidden>
+    <form id="loginForm" class="auth-card">
+      <div class="auth-mark"></div>
+      <p class="eyebrow">VALLEJO PROPERTIES</p>
+      <h1 id="authTitle">Marketing BI</h1>
+      <p>Autorización exclusiva para publicar una actualización del Dashboard.</p>
+      <div class="auth-form">
+        <label>Correo institucional<input id="loginEmail" type="email" autocomplete="username" required></label>
+        <label>Contraseña<input id="loginPassword" type="password" autocomplete="current-password" required></label>
+        <button id="loginBtn" class="btn btn-orange" type="submit">Autorizar actualización</button>
+        <button id="cancelLoginBtn" class="btn btn-subtle" type="button">Cancelar</button>
+        <p id="authMessage" class="auth-message" aria-live="polite"></p>
+      </div>
+    </form>
+  </section>
   <input id="excelFile" class="visually-hidden" type="file" accept=".xlsx,.xls,.xlsm" multiple>
   <div id="loading" class="loading-layer" hidden><div class="loading-card"><span class="spinner-border spinner-border-sm"></span><strong>Validando y consolidando el archivo…</strong></div></div>
 
@@ -491,7 +542,8 @@ footer { display: flex; align-items: flex-end; justify-content: space-between; g
       <div class="header-tools">
         <div class="updated"><span>Actualización</span><strong id="updatedAt">—</strong></div>
         <button id="loadExcelBtn" class="btn btn-orange btn-sm" type="button"><svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0-12 4 4m-4-4L8 7M5 14v5h14v-5"/></svg><span>Agregar / actualizar mes</span></button>
-        <button id="resetDataBtn" class="btn btn-subtle btn-sm" type="button"><svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6M4 4v4.6h4.6"/></svg><span>Restablecer base</span></button>
+        <button id="resetDataBtn" class="btn btn-subtle btn-sm" type="button"><svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6M4 4v4.6h4.6"/></svg><span>Actualizar datos</span></button>
+        <div id="userSession" class="user-session" hidden><span id="userEmail"></span><button id="logoutBtn" class="btn btn-subtle btn-sm" type="button">Salir</button></div>
       </div>
     </section>
 
@@ -1512,23 +1564,93 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-08-06T15:28:30.417Z",
 (function (root) {
   "use strict";
   const VP = root.VP;
-  const STORAGE_KEY = "vallejo-properties-dashboard-marketing-v16";
+  const SUPABASE_URL = "https://jjnrejnacqyidpvxdopy.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_zCCzkCAzGT3DH4FsflSFDw_4klwW6l4";
   const copy = value => JSON.parse(JSON.stringify(value));
   const defaultFilters = model => ({ year: String(model.year || VP.Config.year), month: "GENERAL", advisor: "TODOS", property: "TODAS", location: "TODAS" });
-  const readStoredModel = () => {
-    try {
-      const model = JSON.parse(root.localStorage.getItem(STORAGE_KEY) || "null");
-      return model?.months?.length ? model : null;
-    } catch (_) { return null; }
-  };
-  const storeModel = model => {
-    try { root.localStorage.setItem(STORAGE_KEY, JSON.stringify(model)); return true; }
-    catch (_) { return false; }
+  const cloud = root.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
+  const initialModel = copy(root.VP_DEFAULT_MODEL);
+  const state = { model: initialModel, filters: defaultFilters(initialModel), user: null, isAdmin: false };
+  const render = () => VP.UI.render(state.model, state.filters);
+
+  const setAuthMessage = (message = "", isError = false) => {
+    const element = document.getElementById("authMessage");
+    element.textContent = message;
+    element.className = `auth-message${isError ? " error" : ""}`;
   };
 
-  const initialModel = readStoredModel() || copy(root.VP_DEFAULT_MODEL);
-  const state = { model: initialModel, filters: defaultFilters(initialModel) };
-  const render = () => VP.UI.render(state.model, state.filters);
+  const showLogin = (message = "") => {
+    document.getElementById("authLayer").hidden = false;
+    setAuthMessage(message, Boolean(message));
+    document.getElementById("loginEmail").focus();
+  };
+
+  const showDashboard = () => {
+    document.getElementById("authLayer").hidden = true;
+    document.getElementById("userSession").hidden = !state.user;
+    document.getElementById("userEmail").textContent = state.user?.email || "Usuario autorizado";
+    document.getElementById("loadExcelBtn").hidden = false;
+    document.getElementById("excelFile").disabled = false;
+  };
+
+  const isMissingTableError = error => ["42P01", "PGRST205"].includes(error?.code);
+
+  const loadRemoteModel = async () => {
+    const { data, error } = await cloud.from("dashboard_models").select("model, updated_at").eq("id", "current").maybeSingle();
+    if (error) throw error;
+    return data?.model?.months?.length ? data.model : null;
+  };
+
+  const resolveAdmin = async user => {
+    const { data, error } = await cloud.from("dashboard_admins").select("user_id").eq("user_id", user.id).maybeSingle();
+    if (error) throw error;
+    return Boolean(data?.user_id);
+  };
+
+  const publishModel = async model => {
+    if (!state.user || !state.isAdmin) throw new Error("Tu usuario no tiene permiso para publicar información.");
+    const { error } = await cloud.from("dashboard_models").upsert({
+      id: "current",
+      model,
+      updated_at: model.updatedAt || new Date().toISOString(),
+      updated_by: state.user.id
+    }, { onConflict: "id" });
+    if (error) throw error;
+  };
+
+  const applySession = async session => {
+    VP.UI.loading(true);
+    state.user = session?.user || null;
+    try {
+      state.isAdmin = state.user ? await resolveAdmin(state.user) : false;
+      const remoteModel = await loadRemoteModel();
+      state.model = remoteModel || copy(root.VP_DEFAULT_MODEL);
+      state.filters = defaultFilters(state.model);
+      VP.UI.populateFilters(state.model, state.filters);
+      render();
+      showDashboard();
+      if (!remoteModel) {
+        VP.UI.toast(state.isAdmin
+          ? "Base central preparada. Carga el Excel completo para publicar la información inicial."
+          : "La base central todavía no contiene información publicada; se muestra la versión incluida en el archivo.", "error");
+      }
+    } catch (error) {
+      console.error(error);
+      state.isAdmin = false;
+      state.model = copy(root.VP_DEFAULT_MODEL);
+      state.filters = defaultFilters(state.model);
+      VP.UI.populateFilters(state.model, state.filters);
+      render();
+      showDashboard();
+      VP.UI.toast(isMissingTableError(error)
+        ? "Falta ejecutar setup_supabase.sql en Supabase."
+        : "No fue posible consultar la base central.", "error");
+    } finally {
+      VP.UI.loading(false);
+    }
+  };
 
   const mergeModels = (current, incoming) => {
     const incomingNames = new Set(incoming.months.map(month => month.name));
@@ -1549,6 +1671,10 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-08-06T15:28:30.417Z",
 
   const loadFiles = async files => {
     if (!files?.length) return;
+    if (!state.isAdmin) {
+      showLogin("Autoriza la actualización para poder publicar el archivo mensual.");
+      return;
+    }
     VP.UI.loading(true);
     try {
       let consolidated = state.model;
@@ -1558,33 +1684,79 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-08-06T15:28:30.417Z",
         consolidated = mergeModels(consolidated, incoming);
         updatedMonths.push(...incoming.months.map(month => month.name));
       }
+      consolidated.updatedAt = new Date().toISOString();
+      await publishModel(consolidated);
       state.model = consolidated;
       const uniqueMonths = [...new Set(updatedMonths)];
       state.filters = { ...defaultFilters(state.model), month: uniqueMonths.length === 1 ? uniqueMonths[0] : "GENERAL" };
-      const saved = storeModel(state.model);
       VP.UI.populateFilters(state.model, state.filters);
       render();
-      VP.UI.toast(`${uniqueMonths.map(VP.Utils.title).join(", ")} ${uniqueMonths.length === 1 ? "fue integrado" : "fueron integrados"}. La Vista General ya incluye ${state.model.months.length} meses.${saved ? "" : " La actualización permanecerá durante esta sesión."}`);
+      VP.UI.toast(`${uniqueMonths.map(VP.Utils.title).join(", ")} ${uniqueMonths.length === 1 ? "fue publicado" : "fueron publicados"}. La actualización ya está disponible para todos los usuarios.`);
     } catch (error) {
       console.error(error);
-      VP.UI.toast(error.message || "No fue posible validar el archivo.", "error");
+      VP.UI.toast(error.message || "No fue posible validar y publicar el archivo.", "error");
     } finally {
       VP.UI.loading(false);
       document.getElementById("excelFile").value = "";
     }
   };
 
-  const resetData = () => {
-    try { root.localStorage.removeItem(STORAGE_KEY); } catch (_) {}
-    state.model = copy(root.VP_DEFAULT_MODEL);
-    state.filters = defaultFilters(state.model);
-    VP.UI.populateFilters(state.model, state.filters);
-    render();
-    VP.UI.toast("Se restauró la información precargada del archivo actualizado.");
+  const reloadRemoteData = async () => {
+    VP.UI.loading(true);
+    try {
+      const remoteModel = await loadRemoteModel();
+      if (!remoteModel) throw new Error("Todavía no hay información publicada en Supabase.");
+      state.model = remoteModel;
+      state.filters = defaultFilters(state.model);
+      VP.UI.populateFilters(state.model, state.filters);
+      render();
+      VP.UI.toast("La información se actualizó desde la base central.");
+    } catch (error) {
+      console.error(error);
+      VP.UI.toast(error.message || "No fue posible actualizar la información.", "error");
+    } finally {
+      VP.UI.loading(false);
+    }
+  };
+
+  const signIn = async event => {
+    event.preventDefault();
+    const button = document.getElementById("loginBtn");
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    button.disabled = true;
+    setAuthMessage("Validando acceso…");
+    try {
+      const { data, error } = await cloud.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      document.getElementById("loginPassword").value = "";
+      setAuthMessage();
+      await applySession(data.session);
+    } catch (error) {
+      console.error(error);
+      setAuthMessage("Correo o contraseña incorrectos, o el usuario aún no está confirmado.", true);
+    } finally {
+      button.disabled = false;
+    }
+  };
+
+  const signOut = async () => {
+    VP.UI.loading(true);
+    try { await cloud.auth.signOut(); }
+    finally {
+      state.user = null;
+      state.isAdmin = false;
+      VP.UI.loading(false);
+      showDashboard();
+      VP.UI.toast("La autorización de actualización se cerró.");
+    }
   };
 
   const bind = () => {
-    document.getElementById("loadExcelBtn").addEventListener("click", () => document.getElementById("excelFile").click());
+    document.getElementById("loginForm").addEventListener("submit", signIn);
+    document.getElementById("cancelLoginBtn").addEventListener("click", showDashboard);
+    document.getElementById("logoutBtn").addEventListener("click", signOut);
+    document.getElementById("loadExcelBtn").addEventListener("click", () => state.isAdmin ? document.getElementById("excelFile").click() : showLogin());
     document.getElementById("excelFile").addEventListener("change", event => loadFiles([...event.target.files]));
     ["year", "month", "advisor", "property", "location"].forEach(name => {
       document.getElementById(`${name}Filter`).addEventListener("change", event => {
@@ -1592,18 +1764,22 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":"2026-08-06T15:28:30.417Z",
         render();
       });
     });
-    document.getElementById("resetDataBtn").addEventListener("click", resetData);
+    document.getElementById("resetDataBtn").addEventListener("click", reloadRemoteData);
     document.getElementById("exportExcelBtn").addEventListener("click", () => VP.Tables.exportExcel() ? VP.UI.toast("El detalle filtrado se exportó a Excel.") : VP.UI.toast("No hay registros para exportar.", "error"));
     document.getElementById("exportPdfBtn").addEventListener("click", () => root.print());
   };
 
-  const start = () => {
-    if (!state.model?.months?.length) return VP.UI.toast("No hay información precargada.", "error");
+  const start = async () => {
     root.Chart.defaults.color = "#7A7A7A";
     root.Chart.defaults.font.family = 'Inter, "Segoe UI", sans-serif';
-    VP.UI.populateFilters(state.model, state.filters);
     bind();
+    VP.UI.populateFilters(state.model, state.filters);
     render();
+    showDashboard();
+    if (!cloud) return VP.UI.toast("No fue posible cargar la conexión con Supabase; se muestra la versión incluida.", "error");
+    const { data, error } = await cloud.auth.getSession();
+    if (error) return applySession(null);
+    await applySession(data.session);
   };
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", start) : start();
 })(globalThis);
