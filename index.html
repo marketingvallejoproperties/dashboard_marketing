@@ -378,7 +378,7 @@ button, input, select, textarea, table, option { font-family: Inter, sans-serif;
 .quarter-categories-secondary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .quarter-categories-marketing { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .quarter-categories-marketing ol { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }
-.quarter-monthly-head, .quarter-monthly-row { display: grid; grid-template-columns: .8fr repeat(3, 1fr); gap: 8px; align-items: center; }
+.quarter-monthly-head, .quarter-monthly-row { display: grid; grid-template-columns: .8fr repeat(4, 1fr); gap: 8px; align-items: center; }
 .quarter-monthly-head { padding: 3px 0 7px; color: var(--gray-600); font-size: 8px; text-align: right; }
 .quarter-monthly-head span:first-child { text-align: left; }
 .quarter-monthly-row { padding: 7px 0; border-top: 1px solid var(--gray-100); font-size: 8px; text-align: right; }
@@ -503,17 +503,18 @@ body.auth-locked .dashboard-shell { visibility: hidden; }
 
 </style>
 </head>
-<body class="auth-locked">
-  <section id="authLayer" class="auth-layer" aria-labelledby="authTitle">
+<body>
+  <section id="authLayer" class="auth-layer" aria-labelledby="authTitle" hidden>
     <form id="loginForm" class="auth-card">
       <div class="auth-mark"></div>
       <p class="eyebrow">VALLEJO PROPERTIES</p>
       <h1 id="authTitle">Marketing BI</h1>
-      <p>Acceso privado. Inicia sesión para consultar el Dashboard de Marketing.</p>
+      <p>Acceso administrativo. Inicia sesión únicamente para cargar o actualizar información.</p>
       <div class="auth-form">
         <label>Usuario<input id="loginEmail" type="text" autocomplete="username" autocapitalize="characters" spellcheck="false" required></label>
         <label>Contraseña<input id="loginPassword" type="password" autocomplete="current-password" required></label>
-        <button id="loginBtn" class="btn btn-orange" type="submit">Ingresar al Dashboard</button>
+        <button id="loginBtn" class="btn btn-orange" type="submit">Autorizar carga de Excel</button>
+        <button id="cancelLoginBtn" class="btn btn-subtle" type="button">Volver al dashboard</button>
         <p id="authMessage" class="auth-message" aria-live="polite"></p>
       </div>
     </form>
@@ -1128,6 +1129,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
     if (key.includes("FERNANDA")) return "Fernanda";
     if (key.includes("LINDA")) return "Linda";
     if (key.includes("MIGUEL")) return "Miguel";
+    if (key.includes("VIRIDIANA")) return "Viridiana";
     return "Otros";
   };
   const locationMatches = (zone, selected) => {
@@ -1214,7 +1216,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
       }))
     };
     return {
-      production: ["Alejandro", "Fernanda", "Linda", "Miguel", "Otros"].map(name => ({ name, value: U.sum(scope.records.filter(record => advisorGroup(record.representative) === name), record => record.mrr) })),
+      production: ["Alejandro", "Fernanda", "Linda", "Miguel", "Viridiana", "Otros"].map(name => ({ name, value: U.sum(scope.records.filter(record => advisorGroup(record.representative) === name), record => record.mrr) })),
       origin: orderedMap(scope.origin, ["Directo", "Broker"]),
       properties: U.entries(properties, 20).map(item => ({ ...item, secondary: propertyCounts[U.title(item.name)] || 0 })),
       media: U.entries(scope.media, 20), interests: U.entries(scope.interests, 20), locations: U.entries(scope.locations, 20),
@@ -1240,7 +1242,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
     return {
       years: [String(model.year || VP.Config.year)],
       months: model.months.map(month => ({ value: month.name, label: month.label })),
-      advisors: ["Alejandro", "Fernanda", "Linda", "Miguel", "Otros"],
+      advisors: ["Alejandro", "Fernanda", "Linda", "Miguel", "Viridiana", "Otros"],
       properties: U.unique(model.records.map(record => record.property)).sort((a, b) => a.localeCompare(b, "es")),
       locations: [...VP.Config.locationCatalog]
     };
@@ -1260,10 +1262,10 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
       result[label] = (result[label] || 0) + item.value;
       return result;
     }, {});
-    const grouped = new Map([["Alejandro", 0], ["Fernanda", 0], ["Otros", 0]]);
+    const grouped = new Map([["Alejandro", 0], ["Fernanda", 0], ["Viridiana", 0], ["Otros", 0]]);
     records.forEach(record => {
       const group = advisorGroup(record.representative);
-      const name = group === "Alejandro" || group === "Fernanda" ? group : "Otros";
+      const name = group === "Alejandro" || group === "Fernanda" || group === "Viridiana" ? group : "Otros";
       grouped.set(name, grouped.get(name) + record.mrr);
     });
     const ranking = key => U.entries(U.mergeMaps(months.map(month => month.sections[key])), 3);
@@ -1284,9 +1286,9 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
       brokerClosureLabel: brokerClosures.length && brokerClosures.every(item => U.normalize(item.origin) === "WEB") ? "Ganancia contractual Broker por Web" : "Ganancia contractual Broker",
       monthlyAdvisors: months.map(month => ({
         month: month.label,
-        values: ["Alejandro", "Fernanda", "Otros"].map(name => ({ name, value: U.sum(month.records.filter(record => {
+        values: ["Alejandro", "Fernanda", "Viridiana", "Otros"].map(name => ({ name, value: U.sum(month.records.filter(record => {
           const group = advisorGroup(record.representative);
-          return name === "Otros" ? group !== "Alejandro" && group !== "Fernanda" : group === name;
+          return name === "Otros" ? group !== "Alejandro" && group !== "Fernanda" && group !== "Viridiana" : group === name;
         }), record => record.mrr) }))
       }))
     };
@@ -1509,7 +1511,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
     const rankingList = (items, formatter = U.integer) => items.length ? items.map((item, index) => `<li><b>${index + 1}</b><span>${U.escapeHtml(item.name)}</span><strong>${formatter(item.value)}</strong></li>`).join("") : "<li><span>Sin información</span></li>";
     document.getElementById("quarterlyRankings").innerHTML = A.quarterlyRankings(model).map(quarter => {
       const monthlyRows = quarter.monthlyAdvisors.map(month => `<div class="quarter-monthly-row"><strong>${U.escapeHtml(month.month)}</strong>${month.values.map(item => `<span>${U.compactMoney(item.value)}</span>`).join("")}</div>`).join("");
-      return `<article class="quarter-card"><header><div><strong>${quarter.key}</strong><span>${quarter.label}</span></div><small>Datos generales</small></header><div class="quarter-kpis"><div><span>General mensual</span><strong>${U.money(quarter.gain)}</strong></div><div><span>Leads cerrados</span><strong>${U.integer(quarter.closed)}</strong></div><div class="quarter-kpi-marketing"><span>Ganancia Marketing<small>Contractual</small></span><strong>${U.money(quarter.marketingClosureTotal)}</strong></div></div><section class="quarter-advisors"><h3>Producción por vendedor mensual</h3><div class="quarter-monthly-head"><span>Mes</span><span>Alejandro</span><span>Fernanda</span><span>Otros</span></div>${monthlyRows}</section><div class="quarter-categories quarter-categories-marketing"><section><h3>Ganancia contractual atribuida a medios de marketing · ${U.compactMoney(quarter.marketingClosureTotal)}</h3><ol>${rankingList(quarter.marketingClosureMedia, U.compactMoney)}</ol></section><section><h3>${U.escapeHtml(quarter.brokerClosureLabel)} · ${U.compactMoney(quarter.brokerClosureTotal)}</h3><ol>${rankingList(quarter.brokerClosureCompanies, U.compactMoney)}</ol></section></div><div class="quarter-categories"><section><h3>Medio</h3><ol>${rankingList(quarter.media)}</ol></section><section><h3>Interés</h3><ol>${rankingList(quarter.interests)}</ol></section><section><h3>Ubicaciones</h3><ol>${rankingList(quarter.locations)}</ol></section></div><div class="quarter-categories quarter-categories-secondary"><section><h3>Redes Sociales</h3><ol>${rankingList(quarter.social)}</ol></section><section><h3>Leads Molino Toluca</h3><ol>${rankingList(quarter.molino)}</ol></section></div></article>`;
+      return `<article class="quarter-card"><header><div><strong>${quarter.key}</strong><span>${quarter.label}</span></div><small>Datos generales</small></header><div class="quarter-kpis"><div><span>General mensual</span><strong>${U.money(quarter.gain)}</strong></div><div><span>Leads cerrados</span><strong>${U.integer(quarter.closed)}</strong></div><div class="quarter-kpi-marketing"><span>Ganancia Marketing<small>Contractual</small></span><strong>${U.money(quarter.marketingClosureTotal)}</strong></div></div><section class="quarter-advisors"><h3>Producción por vendedor mensual</h3><div class="quarter-monthly-head"><span>Mes</span><span>Alejandro</span><span>Fernanda</span><span>Viridiana</span><span>Otros</span></div>${monthlyRows}</section><div class="quarter-categories quarter-categories-marketing"><section><h3>Ganancia contractual atribuida a medios de marketing · ${U.compactMoney(quarter.marketingClosureTotal)}</h3><ol>${rankingList(quarter.marketingClosureMedia, U.compactMoney)}</ol></section><section><h3>${U.escapeHtml(quarter.brokerClosureLabel)} · ${U.compactMoney(quarter.brokerClosureTotal)}</h3><ol>${rankingList(quarter.brokerClosureCompanies, U.compactMoney)}</ol></section></div><div class="quarter-categories"><section><h3>Medio</h3><ol>${rankingList(quarter.media)}</ol></section><section><h3>Interés</h3><ol>${rankingList(quarter.interests)}</ol></section><section><h3>Ubicaciones</h3><ol>${rankingList(quarter.locations)}</ol></section></div><div class="quarter-categories quarter-categories-secondary"><section><h3>Redes Sociales</h3><ol>${rankingList(quarter.social)}</ol></section><section><h3>Leads Molino Toluca</h3><ol>${rankingList(quarter.molino)}</ol></section></div></article>`;
     }).join("");
   };
 
@@ -1596,12 +1598,11 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
   };
 
   const showDashboard = () => {
-    if (!state.user) return showLogin();
     document.body.classList.remove("auth-locked");
     document.getElementById("authLayer").hidden = true;
-    document.getElementById("userSession").hidden = false;
-    document.getElementById("userEmail").textContent = EMAIL_USERS[state.user?.email] || "Usuario autorizado";
-    document.getElementById("loadExcelBtn").hidden = !state.isAdmin;
+    document.getElementById("userSession").hidden = !state.user;
+    if (state.user) document.getElementById("userEmail").textContent = EMAIL_USERS[state.user.email] || "Administrador autorizado";
+    document.getElementById("loadExcelBtn").hidden = false;
     document.getElementById("excelFile").disabled = !state.isAdmin;
   };
 
@@ -1633,14 +1634,9 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
   const applySession = async session => {
     VP.UI.loading(true);
     state.user = session?.user || null;
-    if (!state.user) {
-      state.isAdmin = false;
-      VP.UI.loading(false);
-      showLogin();
-      return;
-    }
+    state.isAdmin = false;
     try {
-      state.isAdmin = await resolveAdmin(state.user);
+      if (state.user) state.isAdmin = await resolveAdmin(state.user);
       const remoteModel = await loadRemoteModel();
       if (!remoteModel) throw new Error("Todavía no hay información publicada en Supabase.");
       state.model = remoteModel;
@@ -1651,9 +1647,10 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
     } catch (error) {
       console.error(error);
       state.isAdmin = false;
-      showLogin(isMissingTableError(error)
-        ? "Falta ejecutar setup_supabase.sql en Supabase."
-        : error.message || "No fue posible consultar la base central.");
+      showDashboard();
+      VP.UI.toast(isMissingTableError(error)
+        ? "Falta ejecutar la configuración de Supabase."
+        : error.message || "No fue posible consultar la base central.", "error");
     } finally {
       VP.UI.loading(false);
     }
@@ -1738,12 +1735,17 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
       if (!email) throw new Error("Usuario no reconocido.");
       const { data, error } = await cloud.auth.signInWithPassword({ email, password });
       if (error) throw error;
+      const authorized = await resolveAdmin(data.user);
+      if (!authorized) {
+        await cloud.auth.signOut();
+        throw new Error("Este usuario no tiene permiso para actualizar información.");
+      }
       document.getElementById("loginPassword").value = "";
       setAuthMessage();
       await applySession(data.session);
     } catch (error) {
       console.error(error);
-      setAuthMessage("Usuario o contraseña incorrectos.", true);
+      setAuthMessage(error.message || "No fue posible autorizar la carga.", true);
     } finally {
       button.disabled = false;
     }
@@ -1756,14 +1758,19 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
       state.user = null;
       state.isAdmin = false;
       VP.UI.loading(false);
-      showLogin("La sesión se cerró correctamente.");
+      showDashboard();
+      VP.UI.toast("La sesión administrativa se cerró correctamente.");
     }
   };
 
   const bind = () => {
     document.getElementById("loginForm").addEventListener("submit", signIn);
+    document.getElementById("cancelLoginBtn").addEventListener("click", () => {
+      document.getElementById("loginPassword").value = "";
+      showDashboard();
+    });
     document.getElementById("logoutBtn").addEventListener("click", signOut);
-    document.getElementById("loadExcelBtn").addEventListener("click", () => state.isAdmin ? document.getElementById("excelFile").click() : showLogin());
+    document.getElementById("loadExcelBtn").addEventListener("click", () => state.isAdmin ? document.getElementById("excelFile").click() : showLogin("Solo KARLAVP puede publicar o reemplazar información."));
     document.getElementById("excelFile").addEventListener("change", event => loadFiles([...event.target.files]));
     ["year", "month", "advisor", "property", "location"].forEach(name => {
       document.getElementById(`${name}Filter`).addEventListener("change", event => {
@@ -1780,8 +1787,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"updatedAt":null,"sourceName":"Datos pr
     root.Chart.defaults.color = "#7A7A7A";
     root.Chart.defaults.font.family = 'Inter, "Segoe UI", sans-serif';
     bind();
-    showLogin();
-    if (!cloud) return showLogin("No fue posible establecer la conexión segura.");
+    showDashboard();
+    if (!cloud) return VP.UI.toast("No fue posible establecer conexión con la base central.", "error");
     cloud.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_OUT") applySession(null);
     });
