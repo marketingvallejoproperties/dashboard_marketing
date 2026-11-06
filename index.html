@@ -2167,7 +2167,11 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"months":[{"mrr":274160,"name":"ENERO",
     try {
       const { data, error } = await cloud.from("dashboard_models").select("model").eq("id", "current").maybeSingle();
       if (error) throw error;
-      if (data?.model?.months?.length) state.marketing = data.model;
+      if (data?.model?.months?.length) {
+        const remoteOrder = Math.max(0, ...data.model.months.map(month => Number(month.order) || 0));
+        const localOrder = Math.max(0, ...(state.marketing?.months || []).map(month => Number(month.order) || 0));
+        if (remoteOrder >= localOrder) state.marketing = data.model;
+      }
       if (data?.model?.exits?.records?.length) state.model = data.model.exits;
     } catch (error) { console.warn("Salidas: se conserva la información integrada.", error); }
     renderFilters(); render();
