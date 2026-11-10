@@ -1413,6 +1413,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"months":[{"mrr":274160,"name":"ENERO",
       origin: orderedMap(scope.origin, ["Directo", "Broker"]),
       properties: U.entries(properties, 20).map(item => ({ ...item, secondary: propertyCounts[U.title(item.name)] || 0 })),
       media: U.entries(scope.media, 20), interests: U.entries(scope.interests, 20), locations: U.entries(scope.locations, 20),
+      locationsTotal: U.sum(Object.values(scope.locations || {}), value => Number(value) || 0),
       response: scope.months.map(month => ({ name: month.label.slice(0, 3), fullName: month.label, value: month.responseDays })),
       social: orderedMap(scope.social, ["Vallejo", "Ferreria", "PPNP", "Molino", "Padel"]),
       molino: orderedMap(scope.molino, ["Locales", "Departamentos", "Padel"]),
@@ -1546,7 +1547,8 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"months":[{"mrr":274160,"name":"ENERO",
         borderRadius: 3,
         categoryPercentage: .7,
         barPercentage: .72,
-        maxBarThickness: 42
+        maxBarThickness: 42,
+        minBarLength: 4
       }))
     },
     options: {
@@ -1574,7 +1576,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"months":[{"mrr":274160,"name":"ENERO",
     const max = Math.max(...items.map(item => item.value), 1);
     const rows = items.map(item => `<div class="metric-row"><span class="metric-name" title="${U.escapeHtml(item.fullName || item.name)}">${U.escapeHtml(item.fullName || item.name)}</span><strong class="metric-value">${formatter(item.value)}${options.secondary && item.secondary != null ? ` · ${U.integer(item.secondary)} cierres` : ""}</strong>${options.bars === false ? "" : `<span class="metric-bar"><i style="width:${Math.max(2, item.value / max * 100)}%"></i></span>`}</div>`).join("");
     if (!options.totalLabel) return rows;
-    const total = U.sum(items, item => item.value);
+    const total = options.totalValue == null ? U.sum(items, item => item.value) : Number(options.totalValue) || 0;
     return rows + `<div class="metric-row metric-row-total"><span>${U.escapeHtml(options.totalLabel)}</span>${options.hideTotalValue ? "" : `<strong>${formatter(total)}</strong>`}</div>`;
   };
   const contractTable = (items, options = {}) => {
@@ -1653,7 +1655,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"months":[{"mrr":274160,"name":"ENERO",
     document.getElementById("propertiesSummary").innerHTML = T.metricRows(datasets.properties, U.compactMoney, { totalLabel: "Ganancia", secondary: true });
     document.getElementById("mediaTable").innerHTML = T.metricRows(datasets.media, U.integer, { totalLabel: "Data basada en calificados y no calificados", hideTotalValue: true });
     document.getElementById("interestsTable").innerHTML = T.metricRows(datasets.interests, U.integer, { totalLabel: "Clasificados" });
-    document.getElementById("locationsTable").innerHTML = T.metricRows(datasets.locations, U.integer, { totalLabel: "Registros" });
+    document.getElementById("locationsTable").innerHTML = T.metricRows(datasets.locations, U.integer, { totalLabel: "Registros", totalValue: datasets.locationsTotal });
     document.getElementById("socialTable").innerHTML = T.metricRows(datasets.social, U.integer, { bars: false });
     document.getElementById("molinoTable").innerHTML = T.metricRows(datasets.molino, U.integer, { bars: false });
     document.getElementById("marketingClosureTable").innerHTML = T.metricRows(datasets.marketingClosureMedia, U.compactMoney, { totalLabel: "Total generado" });
@@ -1674,7 +1676,7 @@ globalThis.VP_DEFAULT_MODEL={"year":2026,"months":[{"mrr":274160,"name":"ENERO",
     setText("propertiesTotal", `${U.integer(scope.records.length)} cierres`);
     setText("mediaTotal", "Cambios basados en estrategias para leads calificados");
     setText("interestsTotal", `${U.integer(total(datasets.interests))} clasificados`);
-    setText("locationsTotal", `${U.integer(total(datasets.locations))} registros`);
+    setText("locationsTotal", `${U.integer(datasets.locationsTotal)} registros`);
     setText("responseValue", response.average ? `${U.decimal(response.average)} días` : "—");
     setText("socialTotal", U.integer(total(datasets.social)));
     setText("molinoTotal", U.integer(total(datasets.molino)));
